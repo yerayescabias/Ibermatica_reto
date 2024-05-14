@@ -11,13 +11,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import ibermatica.App;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.StageStyle;
 
 public class sql {
-     private String server="localhost";
+    private String server="localhost";
     private String user="ibermaticaAdmin";
     private String pass="Pa$$W0rd";
     private String db="ibermatica_db";
-    
+    private String id_sesion;
     
 
     public sql(){
@@ -62,18 +65,27 @@ public class sql {
     
         // try-with-resources (closes all the resources when try finishes)
         try (Connection conn = konektatu();){
+            boolean found=true;
             Iterator buscador = users().iterator();
-            while(buscador.hasNext()){
-                User comp_user= (User) buscador.next();
-                if(comp_user.getType()==0 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) ){
-                    App.setRoot("Menu_admin");
-                }else if((comp_user.getType()==1 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) )){
-                    App.setRoot("Menu_trabajador");
-                }else{
+            while(found){
+                while(buscador.hasNext()){
+                    User comp_user= (User) buscador.next();
+                    if(comp_user.getType()==0 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) ){
+                        App.setRoot("Menu_admin");
+                        id_sesion=comp_user.getUser_id();
+                    }else if((comp_user.getType()==1 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) )){
+                        App.setRoot("Menu_trabajador");
+                        id_sesion=comp_user.getUser_id();
+                    }
                     
                 }
-                
+                found=false;
             }
+            Alert iniciofallido = new Alert(AlertType.WARNING);
+                    iniciofallido.initStyle(StageStyle.UNDECORATED);
+                    iniciofallido.setContentText("No se ha encontrado ese usuario");
+                    iniciofallido.showAndWait();
+            
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());
