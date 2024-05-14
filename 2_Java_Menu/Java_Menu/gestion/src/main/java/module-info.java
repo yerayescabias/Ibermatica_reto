@@ -4,7 +4,11 @@ module ibermatica {
     requires java.sql;
 
 
-
     opens ibermatica to javafx.fxml;
-    exports ibermatica;
+    opens ibermatica.model to javafx.fxml;
+    opens ibermatica.controller to javafx.fxml;
+ 
+    exports ibermatica;    
+    exports ibermatica.model;
+    exports ibermatica.controller;
 }

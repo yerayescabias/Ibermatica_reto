@@ -1,125 +1,84 @@
 package ibermatica.model;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import java.util.Iterator;
+
+import ibermatica.App;
 
 public class sql {
      private String server="localhost";
-    private String taula="Herriak";
-    private String user="ikaslea";
-    private String pass="ikaslea";
-    private String db="HerrienDBa";
-    private String herria;
-
+    private String user="ibermaticaAdmin";
+    private String pass="Pa$$W0rd";
+    private String db="ibermatica_db";
+    
+    
 
     public sql(){
 
     }
     
-    public String getHerria() {
-        return herria;
-    }
-    public void setHerria(String herria) {
-        this.herria = herria;
-    }
+    
+    
     public Connection konektatu(){
         String url = "jdbc:mariadb://" + server + "/" + db;
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
-              // System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu
-              // zara.");
+               System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu zara.");
         } catch (SQLException e) {
             System.out.println(e.getErrorCode() + "-" + e.getMessage());
         }
         return conn;
     
     }
-    public int irakurriDatuBakarra(){
-        String sql = "SELECT COUNT(*) AS Kopurua FROM " + taula;
+    public ArrayList<User> users(){
+        String sql ="SELECT * FROM users " ;
     
         // try-with-resources (closes all the resources when try finishes)
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
     
             ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            int count = rs.getInt("Kopurua");
-            System.out.println("Erregistro kopurua: " + count);
-            return count;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return 0;
-        }
-    }
-    
-
-
-    
-    public void txertatu(String izenBerria){
-        String eremua = "Herria";
-        String sql = "INSERT INTO " + taula + "(" + eremua + ") VALUES(?)";
-
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, izenBerria);
-            pstmt.executeUpdate();
-            System.out.println(izenBerria + " ondo txertatu da.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-    public void aldatu(String izenZaharra, String izenBerria){
-        String eremua = "Herria";
-        String sql = "UPDATE " + taula + " SET " + eremua + "= ? WHERE " + eremua + " = ?";
-
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, izenBerria);
-            pstmt.setString(2, izenZaharra);
-            pstmt.executeUpdate();
-            System.out.println(izenZaharra + " izena, " + izenBerria + " izenagatik aldatu da");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
-    public void ezabatu(String izena){
-        String eremua = "Herria";
-        String sql = "DELETE FROM " + taula + " WHERE " + eremua + " = ?";
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, izena);
-            pstmt.executeUpdate();
-            System.out.println("Erregistroa ezabatu da.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public String[] irakurriDatuAnitzak() {
-        String eremua = "Herria";
-        String sql = "SELECT * FROM " + taula;
-        String[] herriak= new String[irakurriDatuBakarra()];
-        int i=0;
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            System.out.println(eremua);
-            System.out.println("=====================================");
-            ResultSet rs = pstmt.executeQuery();
-            // loop through the result set
-            while (rs.next()) {
-                herriak[i]=(rs.getString(eremua));
-                i++;
+            ArrayList<User> trabajadores_list = new ArrayList<User>();
+            while(rs.next()){
+                User trabajador = new User(rs.getString("user_id"),rs.getString("name"),rs.getString("surname"),rs.getString("email"),rs.getInt("tlf_num"),rs.getString("username"),rs.getString("password"),rs.getDate("register_date"),rs.getInt("type"));
+                trabajadores_list.add(trabajador);
             }
-            return herriak;
+            return trabajadores_list;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return new String[0];
+            return null;
         }
     }
+    public void Inicio_sesion(String usuario,String contraseña) throws IOException{
+        
+    
+        // try-with-resources (closes all the resources when try finishes)
+        try (Connection conn = konektatu();){
+            Iterator buscador = users().iterator();
+            while(buscador.hasNext()){
+                User comp_user= (User) buscador.next();
+                if(comp_user.getType()==0 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) ){
+                    App.setRoot("Menu_admin");
+                }else if((comp_user.getType()==1 && comp_user.getUsername().equals(usuario) && comp_user.getPassword().equals(contraseña) )){
+                    App.setRoot("Menu_trabajador");
+                }else{
+                    
+                }
+                
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+    
 }
