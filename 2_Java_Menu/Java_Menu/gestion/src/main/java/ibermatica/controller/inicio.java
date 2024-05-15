@@ -2,6 +2,7 @@ package ibermatica.controller;
 import java.io.IOException;
 
 import ibermatica.model.sql;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,5 +20,10 @@ public class inicio {
         database.users();
         database.Inicio_sesion(user.getText(), password.getText());
 
+    }
+
+    @FXML
+    public void cerrar() throws IOException{
+        Platform.exit();
     }
 }

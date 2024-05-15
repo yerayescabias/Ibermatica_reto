@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.Gestionemple">
    <children>
       <TabPane layoutX="-7.0" layoutY="-8.0" prefHeight="412.0" prefWidth="608.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -34,16 +33,16 @@
                         <Text layoutX="31.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
                         <ComboBox fx:id="tipo_alta" layoutX="32.0" layoutY="301.0" prefWidth="150.0" />
                         <Text layoutX="31.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" />
-                        <Button fx:id="dar_alta" layoutX="267.0" layoutY="121.0" mnemonicParsing="false" text="Dar alta" />
-                        <Button fx:id="clear" layoutX="245.0" layoutY="156.0" mnemonicParsing="false" text="Reiniciar valores" />
-                        <Button fx:id="modificar" layoutX="263.0" layoutY="191.0" mnemonicParsing="false" text="Modificar" />
+                        <Button fx:id="dar_alta" layoutX="267.0" layoutY="121.0" mnemonicParsing="false" onAction="#alta" text="Dar alta" />
+                        <Button fx:id="clear" layoutX="245.0" layoutY="156.0" mnemonicParsing="false" text="Reiniciar valores" onAction="#clear" />
+                        <Button fx:id="modificar" layoutX="263.0" layoutY="191.0" mnemonicParsing="false" text="Modificar" onAction="#modificar" />
                         <TextField fx:id="apellido_modificar" layoutX="492.0" layoutY="178.0" prefHeight="25.0" prefWidth="102.0" />
                         <TextField fx:id="nombre_modificar" layoutX="373.0" layoutY="178.0" prefHeight="25.0" prefWidth="102.0" />
                         <TextField fx:id="telefono_modificar" layoutX="373.0" layoutY="213.0" prefHeight="25.0" prefWidth="102.0" />
                         <TextField fx:id="email_modificar" layoutX="492.0" layoutY="213.0" prefHeight="25.0" prefWidth="102.0" />
                         <TextField fx:id="usuario_modificar" layoutX="373.0" layoutY="249.0" prefHeight="25.0" prefWidth="102.0" />
                         <TextField fx:id="contraseña_modificar" layoutX="492.0" layoutY="249.0" prefHeight="25.0" prefWidth="102.0" />
-                        <TextField fx:id="dni_modificar" layoutX="413.0" layoutY="143.0" prefHeight="25.0" prefWidth="140.0" />
+                        <TextField fx:id="dni_modificar" alignment="CENTER" layoutX="413.0" layoutY="143.0" prefHeight="25.0" prefWidth="140.0" onAction="#modificar_rellenar"/>
                         <ComboBox fx:id="tipo_moficar" layoutX="428.0" layoutY="287.0" prefHeight="25.0" prefWidth="110.0" />
                         <ImageView fitHeight="112.0" fitWidth="112.0" layoutX="427.0" layoutY="21.0">
                            <image>

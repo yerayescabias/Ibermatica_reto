@@ -14,15 +14,15 @@ public class User {
     public int type;
     
     public User(String user_id, String name, String surname, String email, int telefono, String username,
-            String password, Date registerDate, int type) {
+            String password,  int type) {
         this.user_id = user_id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.telefono = telefono;
-        this.username = username;
+        this.username = username; // setUsername(name, surname);
         this.password = password;
-        this.registerDate = registerDate;
+       
         this.type = type;
     }
 
@@ -70,8 +70,10 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String nombre, String apellido,String username) {
+        /*String username=nombre.substring(0, 3) + apellido.substring(0,3);
+        return username;*/
+        this.username=username;
     }
 
     public String getPassword() {
@@ -82,13 +84,7 @@ public class User {
         this.password = password;
     }
 
-    public Date getRegisterDate() {
-        return registerDate;
-    }
 
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
 
     public int getType() {
         return type;
@@ -97,6 +93,7 @@ public class User {
     public void setType(int type) {
         this.type = type;
     }
+    
     
     
 }
