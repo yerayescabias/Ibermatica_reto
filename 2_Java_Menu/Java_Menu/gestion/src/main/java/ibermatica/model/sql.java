@@ -163,4 +163,18 @@ public class sql {
 
     }
 
+    public void contraseña_change(String contraseña) {
+        String sql = "UPDATE FROM users SET password= ? WHERE=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, contraseña);
+            pstmt.setString(2, id_sesion);
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
 }
