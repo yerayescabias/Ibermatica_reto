@@ -12,9 +12,9 @@ public class User {
     public String password;
     public Date registerDate;
     public int type;
-    
+
     public User(String user_id, String name, String surname, String email, int telefono, String username,
-            String password,  int type) {
+            String password, int type) {
         this.user_id = user_id;
         this.name = name;
         this.surname = surname;
@@ -22,7 +22,7 @@ public class User {
         this.telefono = telefono;
         this.username = username; // setUsername(name, surname);
         this.password = password;
-       
+
         this.type = type;
     }
 
@@ -70,10 +70,12 @@ public class User {
         return username;
     }
 
-    public void setUsername(String nombre, String apellido,String username) {
-        /*String username=nombre.substring(0, 3) + apellido.substring(0,3);
-        return username;*/
-        this.username=username;
+    public void setUsername(String nombre, String apellido, String username) {
+        /*
+         * String username=nombre.substring(0, 3) + apellido.substring(0,3);
+         * return username;
+         */
+        this.username = username;
     }
 
     public String getPassword() {
@@ -84,8 +86,6 @@ public class User {
         this.password = password;
     }
 
-
-
     public int getType() {
         return type;
     }
@@ -93,7 +93,5 @@ public class User {
     public void setType(int type) {
         this.type = type;
     }
-    
-    
-    
+
 }
