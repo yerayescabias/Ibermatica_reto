@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import java.util.Iterator;
+import java.util.List;
 
 import ibermatica.App;
 import javafx.scene.control.Alert;
@@ -20,7 +20,8 @@ public class sql {
     private String user = "ibermaticaAdmin";
     private String pass = "Pa$$W0rd";
     private String db = "ibermatica_db";
-    public String id_sesion;
+    public static String id_sesion;
+    
 
     public sql() {
 
@@ -176,5 +177,62 @@ public class sql {
         }
 
     }
+
+    public ArrayList<String> nombre_tablas() {
+        String sql = "Show Tables";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> nombre_tablas = new ArrayList<>();
+            while (rs.next()) {
+                nombre_tablas.add(rs.getString("Tables_in_ibermatica_db"));
+            }
+            return nombre_tablas;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+    public ArrayList<String> nombre_columnas(String tabla) {
+
+        String sql = "show COLUMNS FROM "+tabla;
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> nombre_columnas = new ArrayList<>();
+            while (rs.next()) {
+                nombre_columnas.add(rs.getString("Field"));
+                
+            }
+            return nombre_columnas;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+    public Integer cantidad_columnas(String tabla) {
+        int cantidad = 0;
+        String sql = "show columns from "+tabla;
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                rs.getString("Field");
+                cantidad++;
+            }
+            return cantidad;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
 
 }

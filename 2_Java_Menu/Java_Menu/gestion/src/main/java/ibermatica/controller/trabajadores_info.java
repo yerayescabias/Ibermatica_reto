@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class trabajadores_info {
     sql database = new sql();
-    String id_inicio = database.id_sesion;
+    String id_inicio = sql.id_sesion;
     @FXML
     Pane cambiar, info;
     @FXML
@@ -33,7 +33,8 @@ public class trabajadores_info {
         apellido.setText(database.buscar(id_inicio).getSurname());
         tipo.setText(Validaciones.tipo(database.buscar(id_inicio)));
         dni.setText(database.buscar(id_inicio).getUsername());
-        fecha.setText(database.buscar(id_inicio).getUsername());
+        fecha.setText(String.valueOf(database.buscar(id_inicio).getRegisterDate()));
+        
     }
 
     public void cambio_contraseña() {
@@ -41,16 +42,16 @@ public class trabajadores_info {
         cambiar.setVisible(true);
     }
 
-    public void contr() {
+    public void contra() {
         Alert contraseñas = new Alert(AlertType.WARNING);
-        if (database.buscar(database.id_sesion).getPassword().equals(contraseña_antigua.getText())
+        if (database.buscar(id_inicio).getPassword().equals(contraseña_antigua.getText())
                 && contraseña_nueva.getText() == contraseña_confir.getText()) {
             database.contraseña_change(contraseña_confir.getText());
             Alert confirmacion = new Alert(AlertType.CONFIRMATION);
             confirmacion.setContentText("Contraseña cambiada");
             cambiar.setVisible(false);
             info.setVisible(true);
-        } else if (!(database.buscar(database.id_sesion).getPassword().equals(contraseña_antigua.getText()))) {
+        } else if (!(database.buscar(id_inicio).getPassword().equals(contraseña_antigua.getText()))) {
             contraseñas.setContentText("La contraseña es incorrecta de la actual");
             contraseñas.showAndWait();
         } else if (contraseña_nueva.getText() == contraseña_confir.getText()) {
