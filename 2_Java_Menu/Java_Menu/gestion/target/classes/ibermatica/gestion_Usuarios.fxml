@@ -80,6 +80,6 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="cerrar" layoutX="575.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: none;" text="X" textFill="RED" />
+      <Button fx:id="cerrar" layoutX="575.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: none;" text="X" textFill="RED" onAction="#cerrar"/>
    </children>
 </AnchorPane>

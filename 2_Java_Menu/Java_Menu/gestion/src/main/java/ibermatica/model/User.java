@@ -14,6 +14,19 @@ public class User {
     public int type;
 
     public User(String user_id, String name, String surname, String email, int telefono, String username,
+            String password, int type,Date registerDate) {
+        this.user_id = user_id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.telefono = telefono;
+        this.username = username; // setUsername(name, surname);
+        this.password = password;
+        this.registerDate=registerDate;
+
+        this.type = type;
+    }
+    public User(String user_id, String name, String surname, String email, int telefono, String username,
             String password, int type) {
         this.user_id = user_id;
         this.name = name;
@@ -22,6 +35,7 @@ public class User {
         this.telefono = telefono;
         this.username = username; // setUsername(name, surname);
         this.password = password;
+
 
         this.type = type;
     }

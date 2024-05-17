@@ -1,10 +1,13 @@
 package ibermatica.model;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.Iterator;
 
+import ibermatica.App;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
@@ -39,5 +42,15 @@ public class Validaciones {
             return null;
         }
 
+    }
+
+    @FXML
+    public static void cerrar (){
+        Platform.exit();
+    }
+
+    @FXML
+    public static void atras (String escena) throws IOException{
+        App.setRoot(escena);
     }
 }

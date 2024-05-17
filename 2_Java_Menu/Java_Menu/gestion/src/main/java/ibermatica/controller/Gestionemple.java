@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import ibermatica.model.User;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
@@ -58,9 +59,10 @@ public class Gestionemple {
         Tabla.getColumns().add(columna6);
         Tabla.getColumns().add(columna7);
         Tabla.getColumns().add(columna8);
+        
 
     }
-
+    @FXML
     public void alta() {
         nuevo = new User(dni_alta.getText(), nombre_alta.getText(), apellido_alta.getText(), email_alta.getText(),
                 Integer.parseInt(telefono_alta.getText()),
@@ -79,7 +81,7 @@ public class Gestionemple {
         tipo_moficar.getSelectionModel().select(Validaciones.tipo(nuevo));
         
     }
-
+    @FXML
     public void clear() {
         dni_alta.setText("");
         nombre_alta.setText("");
@@ -97,7 +99,7 @@ public class Gestionemple {
         tipo_moficar.getSelectionModel().clearSelection();
         Dni_buscar.setText("");
     }
-
+    @FXML
     public void modificar_rellenar() {
         User modibusca = database.buscar(dni_modificar.getText());
         apellido_modificar.setText(modibusca.getSurname());
@@ -111,7 +113,7 @@ public class Gestionemple {
         
 
     }
-
+    @FXML
     public void modificar() {
 
         
@@ -123,12 +125,12 @@ public class Gestionemple {
         clear();
 
     }
-
+    @FXML
     public void tabla_dni() {
         Tabla.getItems().clear();
         Tabla.getItems().add(database.buscar(Dni_buscar.getText()));
     }
-
+    @FXML
     public void informacion_tabla() {
         Iterator usuarios = database.users().iterator();
         if (Tabla.getItems().isEmpty()) {
@@ -146,10 +148,15 @@ public class Gestionemple {
         }
 
     }
-
+    @FXML
     public void borrar_usuario() {
         database.borrar_usuario(Dni_buscar.getText());
         clear();
         informacion_tabla();
+    }
+    
+    @FXML
+    public static void cerrar (){
+        Platform.exit();
     }
 }

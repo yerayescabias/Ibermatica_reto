@@ -27,7 +27,7 @@
             <Label fx:id="tipo" layoutX="183.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Tipo" />
             <Label fx:id="dni" layoutX="121.0" layoutY="14.0" prefHeight="17.0" prefWidth="108.0" text="DNI" textAlignment="CENTER" />
             <Button layoutX="175.0" layoutY="167.0" mnemonicParsing="false" text="Cambiar Contraseña" onAction="#cambio_contraseña"/>
-            <Label fx:id="fecreytbha" layoutX="321.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Fecha" />
+            <Label fx:id="fecha" layoutX="321.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Fecha" />
          </children>
       </Pane>
       <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="264.0" layoutY="31.0">

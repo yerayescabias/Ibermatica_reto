@@ -18,7 +18,7 @@
             <Label layoutX="319.0" layoutY="124.0" text="Usuario:" />
             <Label layoutX="319.0" layoutY="211.0" text="Contraseña:" />
             <Button fx:id="btn" layoutX="325.0" layoutY="287.0" mnemonicParsing="false" onAction="#iniciar" text="Iniciar sesion" />
-            <Button fx:id="cerrar" layoutX="576.0" layoutY="4.0" mnemonicParsing="false" onAction="#cerrar"  prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: none;" text="X" textFill="RED">
+            <Button fx:id="cerrar" layoutX="576.0" layoutY="4.0" mnemonicParsing="false" onAction="#cerrar"  prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: none;" text="X" textFill="RED" >
                <font>
                   <Font size="10.0" />
                </font>

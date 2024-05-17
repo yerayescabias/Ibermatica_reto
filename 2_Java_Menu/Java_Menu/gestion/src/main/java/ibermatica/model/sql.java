@@ -52,7 +52,7 @@ public class sql {
             while (rs.next()) {
                 User trabajador = new User(rs.getString("user_id"), rs.getString("name"), rs.getString("surname"),
                         rs.getString("email"), rs.getInt("tlf_num"), rs.getString("username"), rs.getString("password"),
-                        rs.getInt("type"));
+                        rs.getInt("type"),rs.getDate("register_date"));
                 trabajadores_list.add(trabajador);
             }
             return trabajadores_list;
