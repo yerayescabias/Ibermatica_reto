@@ -34,7 +34,7 @@ public class sql {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
-            System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu zara.");
+           // System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu zara.");
         } catch (SQLException e) {
             System.out.println(e.getErrorCode() + "-" + e.getMessage());
         }

@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Visualizar {
     sql database= new sql();
-    ArrayList <Object> datos= new ArrayList<>();
+
     
     @FXML
     ComboBox visualizar_picker;
@@ -60,12 +60,11 @@ public class Visualizar {
          while(rs.next()){
            
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++){
-                datos.add(rs.getString((i)));
+                users_table.getItems().add(rs.getObject(i));
                 
             }
             
         }
-        users_table.getItems().add(datos);
     }
     
     
