@@ -51,7 +51,8 @@ public class Visualizar {
                 if(i>rs.getMetaData().getColumnCount()){
                     break;
                 }else{
-                        TableColumn<String,String> column= new TableColumn<String,String>(database.nombre_columnas(tabla).get(i-1));
+                        TableColumn<Object,Object> column= new TableColumn<Object,Object>(database.nombre_columnas(tabla).get(i-1));
+                        column.setCellValueFactory( new PropertyValueFactory<>((database.nombre_columnas(tabla).get(i))));
                     users_table.getColumns().add(column);
                         
                     }
@@ -60,7 +61,8 @@ public class Visualizar {
          while(rs.next()){
            
             for (int i = 1; i < rs.getMetaData().getColumnCount(); i++){
-                users_table.getItems().add(rs.getObject(i));
+                String dato = rs.getString(i);
+                users_table.getItems().add(dato);
                 
             }
             

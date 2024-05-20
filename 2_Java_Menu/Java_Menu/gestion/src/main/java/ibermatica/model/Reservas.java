@@ -8,15 +8,15 @@ public class Reservas {
     Date start_date;
     Date end_Date;
     Date cancell_date;
-    int reservation_id;
 
 
-    public Reservas(String user_id, String serial_num, Date start_date, Date end_Date, int reservation_id) {
+
+    public Reservas(String user_id, String serial_num, Date start_date, Date end_Date) {
         this.user_id = user_id;
         this.serial_num = serial_num;
         this.start_date = start_date;
         this.end_Date = end_Date;
-        this.reservation_id = reservation_id;
+
     }
 
     public String getUser_id() {
@@ -51,13 +51,7 @@ public class Reservas {
         this.end_Date = end_Date;
     }
 
-    public int getReservation_id() {
-        return reservation_id;
-    }
-
-    public void setReservation_id(int reservation_id) {
-        this.reservation_id = reservation_id;
-    }
+ 
 
     
     

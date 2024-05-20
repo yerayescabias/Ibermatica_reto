@@ -23,7 +23,6 @@ public class sql {
     private String pass = "Pa$$W0rd";
     private String db = "ibermatica_db";
     public static String id_sesion;
-    
 
     public sql() {
 
@@ -34,7 +33,8 @@ public class sql {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
-           // System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu zara.");
+            // System.out.println(server + " zerbidoreko " + db + " datu-basera konektatu
+            // zara.");
         } catch (SQLException e) {
             System.out.println(e.getErrorCode() + "-" + e.getMessage());
         }
@@ -54,7 +54,7 @@ public class sql {
             while (rs.next()) {
                 User trabajador = new User(rs.getString("user_id"), rs.getString("name"), rs.getString("surname"),
                         rs.getString("email"), rs.getInt("tlf_num"), rs.getString("username"), rs.getString("password"),
-                        rs.getInt("type"),rs.getDate("register_date"));
+                        rs.getInt("type"), rs.getDate("register_date"));
                 trabajadores_list.add(trabajador);
             }
             return trabajadores_list;
@@ -199,14 +199,14 @@ public class sql {
 
     public ArrayList<String> nombre_columnas(String tabla) {
 
-        String sql = "show COLUMNS FROM "+tabla;
+        String sql = "show COLUMNS FROM " + tabla;
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> nombre_columnas = new ArrayList<>();
             while (rs.next()) {
                 nombre_columnas.add(rs.getString("Field"));
-                
+
             }
             return nombre_columnas;
 
@@ -216,27 +216,41 @@ public class sql {
         }
 
     }
-    
 
-
-
-    
-    public ResultSet informacion_tabla(String tabla){
-        String sql="Select * FROM "+tabla;
+    public ResultSet informacion_tabla(String tabla) {
+        String sql = "Select * FROM " + tabla;
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
-            
-            return rs;
 
+            return rs;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
 
-
     }
 
+    public ArrayList<Reservas> reservar(String boton) {
+        ArrayList<Reservas> reservas = new ArrayList<>();
+        String sql = "Select name.users,name.machines,start_date,end_date From reservation_machines INNER JOIN machines ON reservation_machines.serial_num=machines.serial_num Inner join users on reservation_machines.user_id=users.users_id  Where name = "
+                + boton;
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Reservas reserva = new Reservas(rs.getString("name.users"), rs.getString("name.machines"),
+                        rs.getDate("start_date"), rs.getDate("start_date"));
+                reservas.add(reserva);
+            }
+            return reservas;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
 
 }
