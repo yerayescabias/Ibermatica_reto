@@ -1,5 +1,8 @@
 package ibermatica.controller;
 
+import java.io.IOException;
+
+import ibermatica.App;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.fxml.FXML;
@@ -21,6 +24,7 @@ public class trabajadores_info {
 
     public void initialize() {
         info.setVisible(true);
+        cambiar.setVisible(false);
         set_valores();
     }
 
@@ -59,5 +63,10 @@ public class trabajadores_info {
             contraseñas.showAndWait();
         }
 
+    }
+
+    @FXML
+    public void atras()throws IOException{
+        App.setRoot("Reservas");
     }
 }

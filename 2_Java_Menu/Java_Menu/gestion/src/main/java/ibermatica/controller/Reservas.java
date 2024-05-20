@@ -11,4 +11,9 @@ public class Reservas {
     public void info() throws IOException{
         App.setRoot("Usuario");
     }
+    
+    @FXML
+    public void atras()throws IOException{
+        App.setRoot("Inicio");
+    }
 }

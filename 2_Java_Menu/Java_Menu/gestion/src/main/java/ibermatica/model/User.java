@@ -12,6 +12,7 @@ public class User {
     public String password;
     public Date registerDate;
     public int type;
+    public Date deleted_Date;
 
     public User(String user_id, String name, String surname, String email, int telefono, String username,
             String password, int type,Date registerDate) {
@@ -35,8 +36,6 @@ public class User {
         this.telefono = telefono;
         this.username = username; // setUsername(name, surname);
         this.password = password;
-
-
         this.type = type;
     }
 

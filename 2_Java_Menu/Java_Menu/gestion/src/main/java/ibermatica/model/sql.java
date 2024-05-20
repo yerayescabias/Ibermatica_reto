@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import java.sql.ResultSetMetaData;
+
 import ibermatica.App;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -214,23 +216,25 @@ public class sql {
         }
 
     }
-    public Integer cantidad_columnas(String tabla) {
-        int cantidad = 0;
-        String sql = "show columns from "+tabla;
+    
+
+
+
+    
+    public ResultSet informacion_tabla(String tabla){
+        String sql="Select * FROM "+tabla;
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
-                rs.getString("Field");
-                cantidad++;
-            }
-            return cantidad;
+            
+            return rs;
+
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
+
 
     }
 

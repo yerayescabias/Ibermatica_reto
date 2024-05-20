@@ -45,12 +45,9 @@ public class Validaciones {
     }
 
     @FXML
-    public static void cerrar (){
+    public void cerrar (){
         Platform.exit();
     }
 
-    @FXML
-    public static void atras (String escena) throws IOException{
-        App.setRoot(escena);
-    }
+    
 }

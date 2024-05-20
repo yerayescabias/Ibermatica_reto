@@ -1,11 +1,11 @@
 package ibermatica.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javafx.scene.control.TableColumn;
-
-
+import ibermatica.App;
 import ibermatica.model.User;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
@@ -156,7 +156,13 @@ public class Gestionemple {
     }
     
     @FXML
-    public static void cerrar (){
+    public void cerrar(){
         Platform.exit();
     }
+
+    @FXML
+    public void atras()throws IOException{
+        App.setRoot("Menu_admin");
+    }
+    
 }
