@@ -13,7 +13,68 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.trabajadores_info">
    <children>
-      <Pane fx:id="cambiar" layoutX="-3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1350.0">
+      <ImageView fitHeight="17.0" fitWidth="17.0" onMouseClicked="#atras">
+         <image>
+            <Image url="@../imagenes/LOGOUT.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="info" layoutY="2.0" prefHeight="750.0" prefWidth="1344.0">
+         <children>
+            <ImageView fitHeight="156.0" fitWidth="152.0" layoutX="60.0" layoutY="66.0">
+               <image>
+                  <Image url="@../imagenes/user.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nombre" layoutX="76.0" layoutY="217.0" prefHeight="43.0" prefWidth="146.0" text="nombre">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="apellido" layoutX="76.0" layoutY="268.0" prefHeight="43.0" prefWidth="187.0" text="Apellido">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="usuario" layoutX="858.0" layoutY="332.0" prefHeight="17.0" prefWidth="108.0" text="Usuario">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="telefono" layoutX="557.0" layoutY="332.0" prefHeight="43.0" prefWidth="123.0" text="Telefono">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="email" layoutX="720.0" layoutY="332.0" prefHeight="17.0" prefWidth="108.0" text="Email">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="tipo" layoutX="503.0" layoutY="161.0" prefHeight="17.0" prefWidth="108.0" text="Tipo">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="dni" layoutX="395.0" layoutY="282.0" prefHeight="17.0" prefWidth="108.0" text="DNI" textAlignment="CENTER">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="74.0" layoutY="418.0" mnemonicParsing="false" onAction="#cambio_contraseña" text="Cambiar Contraseña" />
+            <Label fx:id="fecha" layoutX="252.0" layoutY="144.0" prefHeight="17.0" prefWidth="108.0" text="Fecha">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Button layoutX="75.0" layoutY="488.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="Mis reservas" />
+            <Button layoutX="75.0" layoutY="604.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Atras" />
+            <Button layoutX="222.0" layoutY="604.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Cerrar Sesion" />
+         </children>
+      </Pane>
+      <Pane fx:id="cambiar" layoutX="-3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1350.0" visible="false">
          <children>
             <Text layoutX="553.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña Antigua">
                <font>
@@ -34,34 +95,12 @@
                <font>
                   <Font size="17.0" />
                </font></Button>
-            <ImageView fitHeight="156.0" fitWidth="152.0" layoutX="594.0" layoutY="67.0">
+            <ImageView fitHeight="156.0" fitWidth="152.0">
                <image>
                   <Image url="@../imagenes/user.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="info" layoutX="64.0" layoutY="129.0" prefHeight="750.0" prefWidth="1350.0" visible="false">
-         <children>
-            <Label fx:id="usuario" layoutX="327.0" layoutY="101.0" prefHeight="17.0" prefWidth="108.0" text="Usuario" />
-            <Label fx:id="telefono" layoutX="26.0" layoutY="101.0" prefHeight="17.0" prefWidth="108.0" text="Telefono" />
-            <Label fx:id="email" layoutX="189.0" layoutY="101.0" prefHeight="17.0" prefWidth="108.0" text="Email" />
-            <Label fx:id="nombre" layoutX="237.0" layoutY="14.0" prefHeight="17.0" prefWidth="108.0" text="nombre">
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </Label>
-            <Label fx:id="apellido" layoutX="14.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Apellido" />
-            <Label fx:id="tipo" layoutX="183.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Tipo" />
-            <Label fx:id="dni" layoutX="121.0" layoutY="14.0" prefHeight="17.0" prefWidth="108.0" text="DNI" textAlignment="CENTER" />
-            <Button layoutX="175.0" layoutY="167.0" mnemonicParsing="false" onAction="#cambio_contraseña" text="Cambiar Contraseña" />
-            <Label fx:id="fecha" layoutX="321.0" layoutY="58.0" prefHeight="17.0" prefWidth="108.0" text="Fecha" />
-         </children>
-      </Pane>
-      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="22.0" layoutY="23.0" onMouseClicked="#atras" rotate="180.0">
-         <image>
-            <Image url="@../imagenes/LOGOUT.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
