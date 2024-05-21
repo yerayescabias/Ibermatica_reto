@@ -2,15 +2,15 @@ package ibermatica.model;
 
 import java.io.IOException;
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-import java.sql.ResultSetMetaData;
 
 import ibermatica.App;
 import javafx.scene.control.Alert;
@@ -23,6 +23,7 @@ public class sql {
     private String pass = "Pa$$W0rd";
     private String db = "ibermatica_db";
     public static String id_sesion;
+    public static String serail_num;
 
     public sql() {
 
@@ -217,6 +218,7 @@ public class sql {
 
     }
 
+    @SuppressWarnings("exports")
     public ResultSet informacion_tabla(String tabla) {
         String sql = "Select * FROM " + tabla;
         try (Connection conn = konektatu();
@@ -232,25 +234,68 @@ public class sql {
 
     }
 
-    public ArrayList<Reservas> reservar(String boton) {
-        ArrayList<Reservas> reservas = new ArrayList<>();
-        String sql = "Select name.users,name.machines,start_date,end_date From reservation_machines INNER JOIN machines ON reservation_machines.serial_num=machines.serial_num Inner join users on reservation_machines.user_id=users.users_id  Where name = "
-                + boton;
+    public ResultSet reservasdefault() {
+        String sql = "SELECT users.name, machines.name, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Reservas reserva = new Reservas(rs.getString("name.users"), rs.getString("name.machines"),
-                        rs.getDate("start_date"), rs.getDate("start_date"));
-                reservas.add(reserva);
-            }
-            return reservas;
+
+            return rs;
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
+    }
 
+    public ResultSet reservas(String maquina) {
+        String sql = "SELECT users.name AS Nombre usuario, machines.name AS Nombre maquina, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num WHERE machines.name=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, maquina);
+            ResultSet rs = pstmt.executeQuery();
+
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public void nuevareserva(String start, String end) {
+        String sql = "INSERT INTO reservation_machines(user_id,serial_num,start_date,end_date) VALUES (?,?,?,?)";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id_sesion);
+            pstmt.setString(2, serail_num);
+            pstmt.setString(3, start);
+            pstmt.setString(4, end);
+            ResultSet rs = pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+    public void serial_num(String maquina) {
+        String sql = "Select serial_num from machines where name=? ";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, maquina);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                serail_num = rs.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
     }
 
 }

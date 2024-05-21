@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -33,15 +35,15 @@
             <Image url="@../imagenes/user.png" />
          </image>
       </ImageView>
-      <Line endX="808.3333129882812" layoutX="149.0" layoutY="136.0" startX="-100.0" />
-      <TableView fx:id="reservas_maquina" layoutX="1009.0" layoutY="114.0" prefHeight="593.0" prefWidth="313.0" />
+      <Line endX="808.3333129882812" layoutX="149.0" layoutY="120.0" startX="-100.0" />
+      <TableView fx:id="reservas_maquina" layoutX="974.0" layoutY="114.0" prefHeight="593.0" prefWidth="369.0" />
       <Text layoutX="43.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font></Text>
-      <DatePicker layoutX="43.0" layoutY="208.0" prefHeight="40.0" prefWidth="279.0" />
-      <TextField layoutX="383.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
-      <TextField layoutX="435.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
+      <DatePicker fx:id="inicio_dia" layoutX="43.0" layoutY="208.0" prefHeight="40.0" prefWidth="279.0" />
+      <TextField fx:id="inicio_hora" layoutX="383.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
+      <TextField fx:id="inicio_min" layoutX="435.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
       <Text layoutX="428.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="1.26953125">
          <font>
             <Font size="22.0" />
@@ -49,44 +51,75 @@
       </Text>
       <Text layoutX="379.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font></Text>
-      <Button fx:id="embalaje" layoutX="191.0" layoutY="378.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="210.0" style="-fx-background-color: none;" text="Embalaje">
+      <Button fx:id="embalaje" layoutX="191.0" layoutY="378.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="64.0" prefWidth="210.0" style="-fx-background-color: none;" text="Embalaje">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="procesados" layoutX="174.0" layoutY="469.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="235.0" style="-fx-background-color: none;" text="Procesados">
+      <Button fx:id="procesados" layoutX="174.0" layoutY="469.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="85.0" prefWidth="235.0" style="-fx-background-color: none;" text="Procesados">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="tornos" layoutX="179.0" layoutY="578.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="217.0" style="-fx-background-color: none;" text="Tornos">
+      <Button fx:id="tornos" layoutX="188.0" layoutY="589.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="91.0" prefWidth="217.0" style="-fx-background-color: none;" text="Tornos">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="freasoras" layoutX="438.0" layoutY="354.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="209.0" style="-fx-background-color: none;" text="Fresadoras">
+      <Button fx:id="freasoras" layoutX="438.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="64.0" prefWidth="209.0" style="-fx-background-color: none;" text="Fresadoras">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="lijadoras" layoutX="700.0" layoutY="576.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="167.0" style="-fx-background-color: none;" text="Lijadoras">
+      <Button fx:id="lijadoras" layoutX="704.0" layoutY="580.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="91.0" prefWidth="167.0" style="-fx-background-color: none;" text="Lijadoras">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="selladora" alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="480.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="215.0" rotate="270.0" style="-fx-background-color: none;" text="Selladora" textAlignment="JUSTIFY">
+      <Button fx:id="selladora" alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="480.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="75.0" prefWidth="215.0" rotate="270.0" style="-fx-background-color: none;" text="Selladora" textAlignment="JUSTIFY">
          <font>
             <Font size="34.0" />
          </font></Button>
-      <Button fx:id="soldadura" layoutX="697.0" layoutY="434.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: none;" text="Soldadura">
+      <Button fx:id="soldadura" layoutX="697.0" layoutY="434.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: none;" text="Soldadura">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Button fx:id="hornos" layoutX="168.0" layoutY="295.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="191.0" style="-fx-background-color: none;" text="Hornos">
+      <Button fx:id="hornos" layoutX="183.0" layoutY="296.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="48.0" prefWidth="191.0" style="-fx-background-color: none;" text="Hornos">
          <font>
             <Font size="28.0" />
          </font></Button>
-      <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="16.0" layoutY="23.0" onMouseClicked="#atras" rotate="180.0">
-         <image>
-            <Image url="@../imagenes/LOGOUT.png" />
-         </image>
-      </ImageView>
+      <Text layoutX="526.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="fin_dia" layoutX="526.0" layoutY="211.0" prefHeight="40.0" prefWidth="279.0" />
+      <TextField fx:id="fin_hora" layoutX="866.0" layoutY="211.0" prefHeight="40.0" prefWidth="40.0" />
+      <TextField fx:id="fin_min" layoutX="918.0" layoutY="211.0" prefHeight="40.0" prefWidth="40.0" />
+      <Text layoutX="911.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="1.26953125">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text layoutX="862.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Line endX="352.0" endY="-7.0" layoutX="159.0" layoutY="146.0" startX="352.0" startY="103.0" />
+      <Text layoutX="185.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE RESERVA" wrappingWidth="210.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="682.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FIN DE RESERVA" wrappingWidth="146.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <MenuButton contentDisplay="BOTTOM" layoutX="1228.0" layoutY="32.0" mnemonicParsing="false" opacity="0.0" prefHeight="58.0" prefWidth="50.0" textFill="WHITE">
+        <items>
+         <MenuItem fx:id="mis_reservas" mnemonicParsing="false"   onAction="#mis_reservas" text="Mis reservas" />
+          <MenuItem fx:id="perfil" mnemonicParsing="false" onAction="#info"  text="Perfil" />
+            <MenuItem fx:id="cerrar_sesion" mnemonicParsing="false" onAction="#atras"  text="Cerrar sesion" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

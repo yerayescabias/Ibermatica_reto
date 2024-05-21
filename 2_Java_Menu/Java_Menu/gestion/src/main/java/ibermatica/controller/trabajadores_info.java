@@ -1,6 +1,8 @@
 package ibermatica.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import ibermatica.App;
 import ibermatica.model.Validaciones;
@@ -28,8 +30,9 @@ public class trabajadores_info {
         set_valores();
     }
 
+    
     public void set_valores() {
-
+        String años = String.valueOf((database.buscar(id_inicio).getRegisterDate().toInstant().atZone(ZoneId.systemDefault()).getYear())-LocalDate.now().getYear());
         usuario.setText(database.buscar(id_inicio).getUsername());
         telefono.setText(String.valueOf(database.buscar(id_inicio).getTelefono()));
         email.setText(database.buscar(id_inicio).getEmail());
@@ -37,7 +40,7 @@ public class trabajadores_info {
         apellido.setText(database.buscar(id_inicio).getSurname());
         tipo.setText(Validaciones.tipo(database.buscar(id_inicio)));
         dni.setText(database.buscar(id_inicio).getUsername());
-        fecha.setText(String.valueOf(database.buscar(id_inicio).getRegisterDate()));
+        fecha.setText(años);
         
     }
 

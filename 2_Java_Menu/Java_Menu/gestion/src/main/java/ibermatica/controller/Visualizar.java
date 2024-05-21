@@ -12,6 +12,7 @@ import java.sql.ResultSetMetaData;
 import ibermatica.App;
 import ibermatica.model.sql;
 import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,35 +39,42 @@ public class Visualizar {
         while(tablas_nombre.hasNext()){
             visualizar_picker.getItems().add(tablas_nombre.next());
         }
+        visualizar_picker.getSelectionModel().select(1);
 
     }
 
     @SuppressWarnings("unchecked")
     @FXML
     public void tablas() throws SQLException{
-        
+       
         String tabla= (String) visualizar_picker.getSelectionModel().getSelectedItem();
         ResultSet rs = database.informacion_tabla(tabla);
-        for (int i=1;rs.getMetaData().getColumnCount()>=i;++i) {
-                if(i>rs.getMetaData().getColumnCount()){
-                    break;
-                }else{
-                        TableColumn<Object,Object> column= new TableColumn<Object,Object>(database.nombre_columnas(tabla).get(i-1));
-                        column.setCellValueFactory( new PropertyValueFactory<>((database.nombre_columnas(tabla).get(i))));
-                    users_table.getColumns().add(column);
-                        
-                    }
-                }
+        users_table.getColumns().clear();
+        users_table.getItems().clear();
+    
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+    
+        for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+            final int colIndex = i - 1;
+            TableColumn<ArrayList<String>, String> column = new TableColumn<>(database.nombre_columnas(tabla).get(i-1));
+            column.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(colIndex)));
+            users_table.getColumns().add(column);
+        }
+    
+
+        while (rs.next()) {
+                ArrayList<String> informacion= new ArrayList<>();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 
-         while(rs.next()){
-           
-            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++){
-                String dato = rs.getString(i);
-                users_table.getItems().add(dato);
-                
+                informacion.add(rs.getString(i));
             }
+            data.add(informacion);
             
         }
+        
+        users_table.getItems().addAll(data);
+        
+       
     }
     
     
