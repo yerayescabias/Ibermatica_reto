@@ -3,6 +3,7 @@ package ibermatica.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import ibermatica.App;
 import ibermatica.model.Validaciones;
@@ -32,7 +33,9 @@ public class trabajadores_info {
 
     
     public void set_valores() {
-        String años = String.valueOf((database.buscar(id_inicio).getRegisterDate().toInstant().atZone(ZoneId.systemDefault()).getYear())-LocalDate.now().getYear());
+        
+        ZonedDateTime=database.buscar(id_inicio).getRegisterDate().toInstant().atZone(ZoneId.systemDefault())
+        String años = String.valueOf((.getYear())-LocalDate.now().getYear());
         usuario.setText(database.buscar(id_inicio).getUsername());
         telefono.setText(String.valueOf(database.buscar(id_inicio).getTelefono()));
         email.setText(database.buscar(id_inicio).getEmail());
@@ -43,7 +46,6 @@ public class trabajadores_info {
         fecha.setText(años);
         
     }
-
     public void cambio_contraseña() {
         info.setVisible(false);
         cambiar.setVisible(true);
