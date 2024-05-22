@@ -1,6 +1,6 @@
 package ibermatica.controller;
 
-import java.io.IOError;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -11,12 +11,10 @@ import ibermatica.App;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.application.Platform;
-import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;

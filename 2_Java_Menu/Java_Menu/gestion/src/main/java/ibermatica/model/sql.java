@@ -14,7 +14,6 @@ import java.util.Iterator;
 
 import ibermatica.App;
 import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.stage.StageStyle;
@@ -274,7 +273,7 @@ public class sql {
             pstmt.setString(2, serail_num);
             pstmt.setString(3, start);
             pstmt.setString(4, end);
-            ResultSet rs = pstmt.executeQuery();
+            pstmt.executeQuery();
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -335,17 +334,18 @@ public class sql {
         }
 
     }
-    public String fecha(String serialnum){
-        String fecha="";
-        String sql="Select adquisition_date From machines Where serial_num=?";
+
+    public String fecha(String serialnum) {
+        String fecha = "";
+        String sql = "Select adquisition_date From machines Where serial_num=?";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, serialnum);
 
-            ResultSet rs=pstmt.executeQuery();
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                fecha=rs.getString(1);
-                
+                fecha = rs.getString(1);
+
             }
             return fecha;
         } catch (SQLException e) {
@@ -353,52 +353,53 @@ public class sql {
             return null;
         }
     }
-    public ResultSet info_maquina(String serialnum ){
-        
-        String sql="Select * From machines Where serial_num=?";
+
+    public ResultSet info_maquina(String serialnum) {
+
+        String sql = "Select * From machines Where serial_num=?";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, serialnum);
 
-            ResultSet rs=pstmt.executeQuery();
-            
+            ResultSet rs = pstmt.executeQuery();
+
             return rs;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
-    public ResultSet tablas(Button m, Button a){
-        
-        if(m.isPressed()){
-           
-            String sql="Select * from machines";
+
+    public ResultSet tablas(Button m, Button a) {
+
+        if (m.isPressed()) {
+
+            String sql = "Select * from machines";
             try (Connection conn = konektatu();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
-       
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs=pstmt.executeQuery();
-            
-            return rs;
-            
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+                ResultSet rs = pstmt.executeQuery();
+
+                return rs;
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
             }
-        }else if(a.isPressed()){
+        } else if (a.isPressed()) {
 
-            String sql="Select * from breakdowns";
+            String sql = "Select * from breakdowns";
             try (Connection conn = konektatu();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs=pstmt.executeQuery();
-        
-            return rs;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
+                ResultSet rs = pstmt.executeQuery();
+
+                return rs;
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
             }
-        }else{
+        } else {
             return null;
         }
 
