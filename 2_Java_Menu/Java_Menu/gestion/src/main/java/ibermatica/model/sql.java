@@ -7,14 +7,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 import ibermatica.App;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.StageStyle;
 
 public class sql {
@@ -298,4 +300,107 @@ public class sql {
         }
     }
 
+    public void insert_maquinas(String serialnum, String name, String estado) {
+        String sql = "INSERT INTO machines (serial_num,name,status) Values (?,?,?)";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, serialnum);
+            pstmt.setString(2, name);
+            pstmt.setString(3, estado);
+
+            pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
+    public void modificar_maquinas(String serialnum, String name, String estado, Date adquisition_date) {
+        String sql = "Update machines set serial_num=? , name=?, adquisition_date=?, status=? WHERE serial_num=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, serialnum);
+            pstmt.setString(2, name);
+            pstmt.setDate(3, adquisition_date);
+            pstmt.setString(4, estado);
+            pstmt.setString(5, serialnum);
+
+            pstmt.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+    public String fecha(String serialnum){
+        String fecha="";
+        String sql="Select adquisition_date From machines Where serial_num=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, serialnum);
+
+            ResultSet rs=pstmt.executeQuery();
+            while (rs.next()) {
+                fecha=rs.getString(1);
+                
+            }
+            return fecha;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    public ResultSet info_maquina(String serialnum ){
+        
+        String sql="Select * From machines Where serial_num=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, serialnum);
+
+            ResultSet rs=pstmt.executeQuery();
+            
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    public ResultSet tablas(Button m, Button a){
+        
+        if(m.isPressed()){
+           
+            String sql="Select * from machines";
+            try (Connection conn = konektatu();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+       
+
+            ResultSet rs=pstmt.executeQuery();
+            
+            return rs;
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+            }
+        }else if(a.isPressed()){
+
+            String sql="Select * from breakdowns";
+            try (Connection conn = konektatu();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs=pstmt.executeQuery();
+        
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+            }
+        }else{
+            return null;
+        }
+
+    }
 }

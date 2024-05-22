@@ -1,17 +1,9 @@
 package ibermatica.model;
-
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
-import java.util.Iterator;
-
-import ibermatica.App;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Alert.AlertType;
+
 
 public class Validaciones {
 
@@ -43,7 +35,24 @@ public class Validaciones {
         }
 
     }
-
+    public static String maquinas(String estado){
+        if(estado.equals("Operativa")){
+            return "operational";
+        }else if(estado.equals("Averiada")){
+            return "not_operational";
+        }else{
+            return null;
+        }
+    }
+    public static String maquinasfromdatabase(String estado){
+        if(estado.equals("operational")){
+            return "Operativa";
+        }else if(estado.equals("not_operational")){
+            return "Averiada";
+        }else{
+            return null;
+        }
+    }
     @FXML
     public void cerrar (){
         Platform.exit();

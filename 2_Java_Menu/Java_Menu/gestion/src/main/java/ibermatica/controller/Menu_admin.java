@@ -17,7 +17,7 @@ public class Menu_admin {
 
     @FXML
     public void estado() throws IOException{
-        App.setRoot("status");
+        App.setRoot("gestion_maquinas");
     }
 
     @FXML
