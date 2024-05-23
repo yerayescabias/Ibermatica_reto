@@ -3,8 +3,11 @@ package ibermatica.controller;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.TimeZone;
 
 import ibermatica.App;
 import ibermatica.model.sql;
@@ -13,7 +16,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableView;
@@ -26,36 +29,24 @@ import javafx.util.Callback;
 public class Mis_reservas {
     ArrayList<String> paborrar= new ArrayList<>();
     final int tipo=1;
+    String id_inicio = sql.id_sesion;
     sql database = new sql();
     @FXML
     ScrollPane buttons;
     @FXML
     TableView tabla_mis_reservas;
+    @FXML
+    Label fecha;
 
     @FXML
     public void initialize() throws SQLException{
-        int tipos=1;
-        HBox kendrick= new HBox();
-        Iterator botones= database.maquinas_reservadas().iterator();
-        while(botones.hasNext()){
-            String nombre = (String) botones.next();
-
-            Button info = new Button(nombre);
-            info.setOnMousePressed((MouseEvent) ->{
-                if(info.isPressed()){
-                    try {
-                        ResultSet rs =database.reservas(info.getText(), tipos);
-                        datos(rs);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            kendrick.getChildren().addAll(info);
-        }
-        buttons.setContent(kendrick);
+          Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Spain"));
+        cal.setTime(database.buscar(id_inicio).getRegisterDate());
+        String años = String.valueOf((cal.get(Calendar.YEAR))-LocalDate.now().getYear());
+        fecha.setText(años);
+        buttonbar();
         
-        ResultSet rs = database.reservasdefault(tipos);
+        ResultSet rs = database.reservasdefault(tipo);
         tabla_mis_reservas.getColumns().clear();
         tabla_mis_reservas.getItems().clear();
         ArrayList<ArrayList<String>> columnas = new ArrayList<>();
@@ -81,6 +72,7 @@ public class Mis_reservas {
     @SuppressWarnings("unchecked")
     @FXML
     public void datos(ResultSet rs) throws SQLException {
+        
         tabla_mis_reservas.getColumns().clear();
         tabla_mis_reservas.getItems().clear();
         ArrayList<ArrayList<String>> columnas = new ArrayList<>();
@@ -127,6 +119,7 @@ public class Mis_reservas {
                                 tabla_mis_reservas.getItems().clear();
                                 try {
                                     datos(database.reservas(paborrar.get(2), tipo));
+                                    buttonbar();
                                 } catch (SQLException e) {
                                     
                                     e.printStackTrace();
@@ -146,6 +139,27 @@ public class Mis_reservas {
 
     }
 
+    public void buttonbar(){
+        HBox kendrick= new HBox();
+        Iterator botones= database.maquinas_reservadas().iterator();
+        while(botones.hasNext()){
+            String nombre = (String) botones.next();
+
+            Button info = new Button(nombre);
+            info.setOnMousePressed((MouseEvent) ->{
+                if(info.isPressed()){
+                    try {
+                        ResultSet rs =database.reservas(info.getText(), tipo);
+                        datos(rs);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            kendrick.getChildren().addAll(info);
+        }
+        buttons.setContent(kendrick);
+    }
     @FXML
     public void atras()throws IOException{
         App.setRoot("mis_reservas");
@@ -157,5 +171,9 @@ public class Mis_reservas {
     @FXML
     public void cerrarsesion()throws IOException{
         App.setRoot("Inicio");
+    }
+    @FXML
+    public void info()throws IOException{
+        App.setRoot("Usuario");
     }
 }

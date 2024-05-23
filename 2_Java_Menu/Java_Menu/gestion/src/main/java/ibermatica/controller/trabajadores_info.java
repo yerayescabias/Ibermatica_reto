@@ -54,6 +54,7 @@ public class trabajadores_info {
         dni.setText(database.buscar(id_inicio).getUsername());
         database.buscar(id_inicio).getRegisterDate();
         contraseña.setText(database.buscar(id_inicio).getPassword());
+        dni.setText(id_inicio);
         
         
     }
@@ -112,6 +113,10 @@ public class trabajadores_info {
     @FXML
     public void cerrarsesion()throws IOException{
         App.setRoot("Inicio");
+    }
+    @FXML
+    public void info()throws IOException{
+        App.setRoot("Usuario");
     }
     @FXML
     public void cambio()throws IOException{

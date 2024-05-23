@@ -40,25 +40,8 @@ public class Reservas {
 
     @FXML
     public void initialize() throws SQLException {
-        int tipos=0;
-        ResultSet rs = database.reservasdefault(tipos);
-        reservas_maquina.getColumns().clear();
-        reservas_maquina.getItems().clear();
-        ArrayList<ArrayList<String>> columnas = new ArrayList<>();
-        for (int index = 1; index <= rs.getMetaData().getColumnCount(); index++) {
-            final int col = index - 1;
-            TableColumn<ArrayList<String>, String> columa = new TableColumn<>(rs.getMetaData().getColumnName((index)));
-            columa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(col)));
-            reservas_maquina.getColumns().add(columa);
-        }
-        while (rs.next()) {
-            ArrayList<String> reservasdatos = new ArrayList<>();
-            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                reservasdatos.add(rs.getString(i));
-            }
-            columnas.add(reservasdatos);
-        }
-        reservas_maquina.getItems().addAll(columnas);
+        tabladereserva();
+        
     }
 
     @FXML
@@ -95,41 +78,50 @@ public class Reservas {
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(procesados.getText(), tipos);
             reservas_tabla(rs);
+            clear();
+
         } else if (embalaje.isPressed()) {
             database.serial_num(embalaje.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(embalaje.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (tornos.isPressed()) {
             database.serial_num(tornos.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(tornos.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (freasoras.isPressed()) {
             database.serial_num(freasoras.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(freasoras.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (lijadoras.isPressed()) {
             database.serial_num(lijadoras.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(lijadoras.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (selladora.isPressed()) {
             database.serial_num(selladora.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(selladora.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (soldadura.isPressed()) {
             database.serial_num(soldadura.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(soldadura.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         } else if (hornos.isPressed()) {
             database.serial_num(hornos.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(hornos.getText(), tipos);
             reservas_tabla(rs);
+            clear();
         }
        }
         
@@ -157,6 +149,35 @@ public class Reservas {
         reservas_maquina.getItems().addAll(columnas);
     }
 
+    public void clear(){
+        fin_dia.setValue(null); 
+        inicio_dia.setValue(null);
+        inicio_hora.setText("");
+        inicio_min.setText("");
+        fin_hora.setText("");
+        fin_min.setText("");
+    }
+    
+    public void tabladereserva() throws SQLException{
+        ResultSet rs = database.reservasdefault(tipos);
+        reservas_maquina.getColumns().clear();
+        reservas_maquina.getItems().clear();
+        ArrayList<ArrayList<String>> columnas = new ArrayList<>();
+        for (int index = 1; index <= rs.getMetaData().getColumnCount(); index++) {
+            final int col = index - 1;
+            TableColumn<ArrayList<String>, String> columa = new TableColumn<>(rs.getMetaData().getColumnName((index)));
+            columa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(col)));
+            reservas_maquina.getColumns().add(columa);
+        }
+        while (rs.next()) {
+            ArrayList<String> reservasdatos = new ArrayList<>();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                reservasdatos.add(rs.getString(i));
+            }
+            columnas.add(reservasdatos);
+        }
+        reservas_maquina.getItems().addAll(columnas);
+    }
     @FXML
     public void info() throws IOException {
         App.setRoot("Usuario");
