@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.sql.Date;
 
 import java.util.ArrayList;
@@ -235,44 +238,81 @@ public class sql {
 
     }
 
-    public ResultSet reservasdefault() {
-        String sql = "SELECT users.name, machines.name, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num";
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public ResultSet reservasdefault(int i) {
+        if (i == 0) {
+            String sql = "SELECT users.name, machines.name, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num";
+            try (Connection conn = konektatu();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs = pstmt.executeQuery();
+                ResultSet rs = pstmt.executeQuery();
 
-            return rs;
+                return rs;
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        } else if (i == 1) {
+            String sql = "SELECT reservation_machines.serial_num, machines.name, start_date,end_date FROM reservation_machines Inner Join machines On reservation_machines.serial_num=machines.serial_num where user_id=?";
+            try (Connection conn = konektatu();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, id_sesion);
+
+                ResultSet rs = pstmt.executeQuery();
+
+                return rs;
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        } else {
             return null;
         }
     }
 
-    public ResultSet reservas(String maquina) {
-        String sql = "SELECT users.name AS Nombre usuario, machines.name AS Nombre maquina, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num WHERE machines.name=?";
-        try (Connection conn = konektatu();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, maquina);
-            ResultSet rs = pstmt.executeQuery();
+    public ResultSet reservas(String maquina, int tipo) {
+        if (tipo == 0) {
+            String sql = "SELECT users.name , machines.name, start_date,end_date FROM reservation_machines Inner Join users On reservation_machines.user_id=users.user_id Inner Join machines On reservation_machines.serial_num=machines.serial_num WHERE machines.name=?";
+            try (Connection conn = konektatu();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, maquina);
+                ResultSet rs = pstmt.executeQuery();
 
-            return rs;
+                return rs;
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        } else if (tipo == 1) {
+            String sql = "SELECT reservation_id,reservation_machines.serial_num , machines.name, start_date,end_date FROM reservation_machines Inner Join machines On reservation_machines.serial_num=machines.serial_num WHERE machines.name=?";
+            try (Connection conn = konektatu();
+                    PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setString(1, maquina);
+                ResultSet rs = pstmt.executeQuery();
+
+                return rs;
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return null;
+            }
+        } else {
             return null;
         }
+
     }
 
-    public void nuevareserva(String start, String end) {
+    public void nuevareserva(LocalDate start, LocalDate end, LocalTime inicio, LocalTime fina) {
         String sql = "INSERT INTO reservation_machines(user_id,serial_num,start_date,end_date) VALUES (?,?,?,?)";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, id_sesion);
             pstmt.setString(2, serail_num);
-            pstmt.setString(3, start);
-            pstmt.setString(4, end);
+            pstmt.setString(3, LocalDateTime.of(start, inicio).toString());
+            pstmt.setString(4, LocalDateTime.of(end, fina).toString());
             pstmt.executeQuery();
 
         } catch (SQLException e) {
@@ -401,6 +441,40 @@ public class sql {
             }
         } else {
             return null;
+        }
+
+    }
+
+    public ArrayList<String> maquinas_reservadas() {
+        String sql = "Select machines.name From reservation_machines Inner join machines on reservation_machines.serial_num=machines.serial_num Where user_id=? group by machines.name";
+
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id_sesion);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> nombremaquinas = new ArrayList<>();
+            while (rs.next()) {
+                nombremaquinas.add(rs.getString(1));
+
+            }
+            return nombremaquinas;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+    public void borrar_reserva(String ID) {
+        String sql = "Delete from reservation_machines WHERE reservation_id=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, ID);
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
         }
 
     }

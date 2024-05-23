@@ -3,6 +3,7 @@ package ibermatica.controller;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -18,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class Reservas {
+    int tipos=0;
     sql database = new sql();
     ArrayList<Reservas> reservas = new ArrayList<>();
     Boolean presionado = true;
@@ -38,11 +40,12 @@ public class Reservas {
 
     @FXML
     public void initialize() throws SQLException {
-        ResultSet rs = database.reservasdefault();
+        int tipos=0;
+        ResultSet rs = database.reservasdefault(tipos);
         reservas_maquina.getColumns().clear();
         reservas_maquina.getItems().clear();
         ArrayList<ArrayList<String>> columnas = new ArrayList<>();
-        for (int index = 1; index < rs.getMetaData().getColumnCount(); index++) {
+        for (int index = 1; index <= rs.getMetaData().getColumnCount(); index++) {
             final int col = index - 1;
             TableColumn<ArrayList<String>, String> columa = new TableColumn<>(rs.getMetaData().getColumnName((index)));
             columa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(col)));
@@ -50,7 +53,7 @@ public class Reservas {
         }
         while (rs.next()) {
             ArrayList<String> reservasdatos = new ArrayList<>();
-            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 reservasdatos.add(rs.getString(i));
             }
             columnas.add(reservasdatos);
@@ -62,70 +65,70 @@ public class Reservas {
     public void buttonpressed() throws SQLException {
        if(inicio_hora.getText().isEmpty()|| inicio_min.getText().isEmpty()|| fin_hora.getText().isEmpty()|| fin_min.getText().isEmpty()|| fin_dia.getValue().toString().isEmpty()|| inicio_dia.getValue().toString().isEmpty()){
         if ((procesados.isPressed())) {
-            rs = database.reservas(procesados.getText());
+            rs = database.reservas(procesados.getText(), tipos);
             reservas_tabla(rs);
         } else if (embalaje.isPressed()) {
-            rs = database.reservas(embalaje.getText());
+            rs = database.reservas(embalaje.getText(), tipos);
             reservas_tabla(rs);
         } else if (tornos.isPressed()) {
-            rs = database.reservas(tornos.getText());
+            rs = database.reservas(tornos.getText(), tipos);
             reservas_tabla(rs);
         } else if (freasoras.isPressed()) {
-            rs = database.reservas(freasoras.getText());
+            rs = database.reservas(freasoras.getText(), tipos);
             reservas_tabla(rs);
         } else if (lijadoras.isPressed()) {
-            rs = database.reservas(lijadoras.getText());
+            rs = database.reservas(lijadoras.getText(), tipos);
             reservas_tabla(rs);
         } else if (selladora.isPressed()) {
-            rs = database.reservas(selladora.getText());
+            rs = database.reservas(selladora.getText(), tipos);
             reservas_tabla(rs);
         } else if (soldadura.isPressed()) {
-            rs = database.reservas(soldadura.getText());
+            rs = database.reservas(soldadura.getText(), tipos);
             reservas_tabla(rs);
         } else if (hornos.isPressed()) {
-            rs = database.reservas(hornos.getText());
+            rs = database.reservas(hornos.getText(), tipos);
             reservas_tabla(rs);
         }
        }else{
         if ((procesados.isPressed())) {
             database.serial_num(procesados.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(procesados.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(procesados.getText(), tipos);
             reservas_tabla(rs);
         } else if (embalaje.isPressed()) {
             database.serial_num(embalaje.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(embalaje.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(embalaje.getText(), tipos);
             reservas_tabla(rs);
         } else if (tornos.isPressed()) {
             database.serial_num(tornos.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(tornos.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(tornos.getText(), tipos);
             reservas_tabla(rs);
         } else if (freasoras.isPressed()) {
             database.serial_num(freasoras.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(freasoras.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(freasoras.getText(), tipos);
             reservas_tabla(rs);
         } else if (lijadoras.isPressed()) {
             database.serial_num(lijadoras.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(lijadoras.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(lijadoras.getText(), tipos);
             reservas_tabla(rs);
         } else if (selladora.isPressed()) {
             database.serial_num(selladora.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(selladora.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(selladora.getText(), tipos);
             reservas_tabla(rs);
         } else if (soldadura.isPressed()) {
             database.serial_num(soldadura.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(soldadura.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(soldadura.getText(), tipos);
             reservas_tabla(rs);
         } else if (hornos.isPressed()) {
             database.serial_num(hornos.getText());
-            database.nuevareserva(inicio_dia.getValue().toString(),fin_dia.getValue().toString());
-            rs = database.reservas(hornos.getText());
+            database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
+            rs = database.reservas(hornos.getText(), tipos);
             reservas_tabla(rs);
         }
        }
@@ -138,7 +141,7 @@ public class Reservas {
         reservas_maquina.getColumns().clear();
         reservas_maquina.getItems().clear();
         ArrayList<ArrayList<String>> columnas = new ArrayList<>();
-        for (int index = 1; index < rs.getMetaData().getColumnCount(); index++) {
+        for (int index = 1; index <= rs.getMetaData().getColumnCount(); index++) {
             final int col = index - 1;
             TableColumn<ArrayList<String>, String> columa = new TableColumn<>(rs.getMetaData().getColumnName((index)));
             columa.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().get(col)));
@@ -146,7 +149,7 @@ public class Reservas {
         }
         while (rs.next()) {
             ArrayList<String> reservasdatos = new ArrayList<>();
-            for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 reservasdatos.add(rs.getString(i));
             }
             columnas.add(reservasdatos);
@@ -159,9 +162,9 @@ public class Reservas {
         App.setRoot("Usuario");
 
     }
-
+    @FXML
     public void mis_reservas() throws IOException{
-        App.setRoot("user_reservas");
+        App.setRoot("mis_reservas");
     }
 
     @FXML
