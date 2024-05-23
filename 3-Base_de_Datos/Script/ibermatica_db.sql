@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS reservation_machines_cancelled (
     end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP() NOT NULL,
     reservation_id INT AUTO_INCREMENT NOT NULL,
     cancelled_date DATE NOT NULL DEFAULT current_timestamp(),
-    CONSTRAINT CU_reservation_machines_cancelled UNIQUE (user_id, serial_num),
     PRIMARY KEY(reservation_id)
 );
 
