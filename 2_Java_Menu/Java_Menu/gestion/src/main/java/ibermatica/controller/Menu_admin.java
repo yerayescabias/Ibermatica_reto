@@ -9,7 +9,11 @@ import javafx.fxml.FXML;
 public class Menu_admin {
     
 
-
+    
+    @FXML
+    public void cerrarsesion()throws IOException{
+        App.setRoot("Inicio");
+    }
     @FXML
     public void gestion() throws IOException{
         App.setRoot("gestion_Usuarios");
