@@ -88,7 +88,7 @@ public class sql {
                     App.setRoot("Reservas");
                     id_sesion = comp_user.getUser_id();
                     found = false;
-                } else if (buscador.hasNext() == false && found) {
+                } else if (buscador.hasNext() == false && found && Validaciones.rellenar==true) {
                     Alert iniciofallido = new Alert(AlertType.WARNING);
                     iniciofallido.initStyle(StageStyle.UNDECORATED);
                     iniciofallido.setContentText("No se ha encontrado ese usuario");

@@ -42,6 +42,7 @@ public class Reservas {
     public void initialize() throws SQLException {
         tabladereserva();
         
+        
     }
 
     @FXML

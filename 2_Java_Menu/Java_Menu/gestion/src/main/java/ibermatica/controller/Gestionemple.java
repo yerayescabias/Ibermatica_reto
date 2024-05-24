@@ -10,17 +10,20 @@ import ibermatica.model.User;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+
 public class Gestionemple {
     sql database = new sql();
     int type = 0;
     User nuevo;
     ArrayList<String> parametros = new ArrayList<>();
+    boolean validaciones = true;
 
     @FXML
     TextField dni_alta, nombre_alta, apellido_alta, telefono_alta, email_alta, apellido_modificar, nombre_modificar,
@@ -59,26 +62,37 @@ public class Gestionemple {
         Tabla.getColumns().add(columna6);
         Tabla.getColumns().add(columna7);
         Tabla.getColumns().add(columna8);
-        
-
+        Validaciones.limite(dni_alta);
+        Validaciones.limitetelefono(telefono_alta);
+        Validaciones.limite(dni_modificar);
+        Validaciones.limitetelefono(telefono_modificar);
+        Validaciones.limite(Dni_buscar);
     }
     @FXML
     public void alta() {
-        nuevo = new User(dni_alta.getText(), nombre_alta.getText(), apellido_alta.getText(), email_alta.getText(),
+        
+        if(Validaciones.dni(dni_alta)== false ||  Validaciones.telefono(telefono_alta)== false || Validaciones.nombre(nombre_alta, apellido_alta,tipo_alta,email_alta)== false){
+
+        }else{
+                nuevo = new User(dni_alta.getText(), nombre_alta.getText(), apellido_alta.getText(), email_alta.getText(),
                 Integer.parseInt(telefono_alta.getText()),
                 Validaciones.usuarioAUTO(nombre_alta.getText(), apellido_alta.getText()),
                 Validaciones.contraseñasAUTO(nombre_alta.getText()), Validaciones.input_tipo(tipo_alta));
-        database.usersADD(nuevo);
+            database.usersADD(nuevo);
 
-        clear();
-        apellido_modificar.setText(nuevo.getSurname());
-        nombre_modificar.setText(nuevo.getName());
-        telefono_modificar.setText(String.valueOf(nuevo.getTelefono()));
-        email_modificar.setText(nuevo.getEmail());
-        usuario_modificar.setText(nuevo.getUsername());
-        contraseña_modificar.setText(nuevo.getPassword());
-        dni_modificar.setText(nuevo.getUser_id());
-        tipo_moficar.getSelectionModel().select(Validaciones.tipo(nuevo));
+            clear();
+            apellido_modificar.setText(nuevo.getSurname());
+             nombre_modificar.setText(nuevo.getName());
+            telefono_modificar.setText(String.valueOf(nuevo.getTelefono()));
+            email_modificar.setText(nuevo.getEmail());
+            usuario_modificar.setText(nuevo.getUsername());
+            contraseña_modificar.setText(nuevo.getPassword());
+            dni_modificar.setText(nuevo.getUser_id());
+            tipo_moficar.getSelectionModel().select(Validaciones.tipo(nuevo));
+        }
+       
+        
+       
         
     }
     @FXML
@@ -115,20 +129,28 @@ public class Gestionemple {
     }
     @FXML
     public void modificar() {
-
-        
-        User modifiUser = new User(dni_modificar.getText(), nombre_modificar.getText(), apellido_modificar.getText(),
+        if(Validaciones.dni(dni_modificar)== false ||  Validaciones.telefono(telefono_modificar)== false || Validaciones.nombre(nombre_modificar, apellido_modificar,tipo_moficar,email_modificar)== false){
+        }
+        else{
+            User modifiUser = new User(dni_modificar.getText(), nombre_modificar.getText(), apellido_modificar.getText(),
                 email_modificar.getText(), Integer.parseInt(telefono_modificar.getText()),
                 Validaciones.usuarioAUTO(nombre_modificar.getText(), apellido_modificar.getText()),
                 Validaciones.contraseñasAUTO(nombre_modificar.getText()), Validaciones.input_tipo(tipo_moficar));
         database.modificar(modifiUser);
         clear();
+        }
+        
 
     }
     @FXML
     public void tabla_dni() {
-        Tabla.getItems().clear();
+        if(Validaciones.dni(Dni_buscar)==false){
+
+        }else{
+            Tabla.getItems().clear();
         Tabla.getItems().add(database.buscar(Dni_buscar.getText()));
+        }
+        
     }
     @FXML
     public void informacion_tabla() {
@@ -164,5 +186,10 @@ public class Gestionemple {
     public void atras()throws IOException{
         App.setRoot("Menu_admin");
     }
+
+    
     
 }
+    
+
+
