@@ -7,30 +7,29 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class Menu_admin {
-    
 
-    
     @FXML
-    public void cerrarsesion()throws IOException{
+    public void cerrarsesion() throws IOException {
         App.setRoot("Inicio");
     }
+
     @FXML
-    public void gestion() throws IOException{
+    public void gestion() throws IOException {
         App.setRoot("gestion_Usuarios");
     }
 
     @FXML
-    public void estado() throws IOException{
+    public void estado() throws IOException {
         App.setRoot("gestion_maquinas");
     }
 
     @FXML
-    public void visualizar() throws IOException{
+    public void visualizar() throws IOException {
         App.setRoot("Visualozar_Datos");
     }
 
     @FXML
-    public void cerrar() throws IOException{
+    public void cerrar() throws IOException {
         Platform.exit();
     }
 }

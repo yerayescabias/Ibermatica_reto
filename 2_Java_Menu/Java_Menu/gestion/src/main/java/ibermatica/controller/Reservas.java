@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 
 import ibermatica.App;
+import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
@@ -22,7 +23,6 @@ public class Reservas {
     int tipos=0;
     sql database = new sql();
     ArrayList<Reservas> reservas = new ArrayList<>();
-    Boolean presionado = true;
     @FXML
     Button procesados, embalaje, tornos, freasoras, lijadoras, selladora, soldadura, hornos;
     @FXML
@@ -74,7 +74,10 @@ public class Reservas {
             reservas_tabla(rs);
         }
        }else{
-        if ((procesados.isPressed())) {
+            if(Validaciones.horas(inicio_dia,fin_dia, fin_hora, fin_min,  inicio_hora, inicio_min)==false ){
+
+            }else{
+                if ((procesados.isPressed())) {
             database.serial_num(procesados.getText());
             database.nuevareserva(inicio_dia.getValue(),fin_dia.getValue(),LocalTime.of(Integer.parseInt(inicio_hora.getText()),Integer.parseInt(inicio_min.getText())),LocalTime.of(Integer.parseInt(fin_hora.getText()),Integer.parseInt(fin_min.getText())));
             rs = database.reservas(procesados.getText(), tipos);
@@ -124,6 +127,8 @@ public class Reservas {
             reservas_tabla(rs);
             clear();
         }
+            }
+        
        }
         
     }

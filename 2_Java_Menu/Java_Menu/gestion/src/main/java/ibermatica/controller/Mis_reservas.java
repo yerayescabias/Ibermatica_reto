@@ -8,13 +8,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.TimeZone;
-
 import ibermatica.App;
 import ibermatica.model.sql;
 import javafx.beans.property.ReadOnlyStringWrapper;
-
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;

@@ -34,6 +34,8 @@ public class Gestion_maquinas {
     public void initialize() {
         m_estado.getItems().addAll("Operativa", "Averiada");
         n_estado.getItems().addAll("Operativa", "Averiada");
+        Validaciones.limite(n_num, 10);
+        Validaciones.limite(m_num,10);
     }
 
     @FXML
@@ -48,9 +50,12 @@ public class Gestion_maquinas {
     }
 
     @FXML
-    public void nuevamaquina() {
-        database.insert_maquinas(n_num.getText(), n_tipo.getText(),
-                Validaciones.maquinas(n_estado.getSelectionModel().getSelectedItem().toString()));
+    public void nuevamaquina() throws SQLException {
+        if(Validaciones.dni(n_num, 10)==false || Validaciones.nombre(n_tipo)==false || Validaciones.combo(n_estado)== false || Validaciones.basededatos("machines", n_num)==false  ){
+
+        }else{
+            database.insert_maquinas(n_num.getText(), n_tipo.getText(),
+        Validaciones.maquinas(n_estado.getSelectionModel().getSelectedItem().toString()));
         m_num.setText(n_num.getText());
         m_tipo.setText(n_tipo.getText());
         m_fecha.setText(database.fecha(n_num.getText()));
@@ -58,15 +63,21 @@ public class Gestion_maquinas {
         n_num.setText("");
         n_tipo.setText("");
         n_estado.getSelectionModel().clearSelection();
+        }
+        
 
     }
 
     @FXML
     public void modificar_maquina() {
+        if(Validaciones.dni(m_num, 10)==false || Validaciones.nombre(m_tipo)==false || Validaciones.combo(m_estado)== false || Validaciones.fechas(m_fecha)==false  ){
+            
+        }else{
         database.modificar_maquinas(m_num.getText(), m_tipo.getText(),
                 Validaciones.maquinas(m_estado.getSelectionModel().getSelectedItem().toString()),
                 Date.valueOf(m_fecha.getText()));
         clear();
+        }
 
     }
 
