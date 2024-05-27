@@ -280,8 +280,8 @@ public class Validaciones {
         }
 
     }
-    public static boolean reservas(){
-        
-    }
+    /*public static boolean reservas(){
 
+    }*/
+    
 }
