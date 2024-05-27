@@ -3,17 +3,15 @@ package ibermatica.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
-
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 
 public class Validaciones {
     static sql database = new sql();
@@ -254,8 +252,8 @@ public class Validaciones {
         }
 
     }
-    public static boolean horas (DatePicker fecha,DatePicker fecha_final ,TextField hora_fin,TextField min_fin , TextField hora_inicio,TextField min_inicio){
-        if(fecha.getValue().equals(null) || hora_fin.getText().isEmpty() || min_fin.getText().isEmpty() || hora_inicio.getText().isEmpty()  || min_inicio.getText().isEmpty()|| fecha_final.getValue().equals(null) ){
+    public static boolean horas (DatePicker fecha,DatePicker fecha_final ){
+        if(fecha.getValue().equals(null) ||  fecha_final.getValue().equals(null) ){
             alerta.setContentText("Rellena la fecha");
             alerta.showAndWait();
             return false;
@@ -263,25 +261,12 @@ public class Validaciones {
             alerta.setContentText("Primero la fecha de inicio y despues la fecha final");
             alerta.showAndWait();
             return false;
-        }else if( !(fecha.getValue().equals(null) || hora_fin.getText().isEmpty() || min_fin.getText().isEmpty() || hora_inicio.getText().isEmpty()  || min_inicio.getText().isEmpty()|| fecha_final.getValue().equals(null))){
-            try {
-            
-                LocalTime.of(Integer.parseInt(hora_fin.getText()), Integer.parseInt(min_fin.getText()), 0);
-                LocalTime.of(Integer.parseInt(hora_inicio.getText()), Integer.parseInt(hora_inicio.getText()), 0);
-                return true;
-            } catch (Exception e) {
-                alerta.setContentText("Hora invalida");
-                alerta.showAndWait();
-                return false;
-            }
         
         }else{
             return true;
         }
 
     }
-    /*public static boolean reservas(){
-
-    }*/
+    
     
 }

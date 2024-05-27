@@ -5,7 +5,6 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.Reservas" onMouseClicked="#tabladereserva">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#tabladereserva" prefHeight="750.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.Reservas">
    <children>
       <ImageView fitHeight="508.0" fitWidth="971.0" layoutX="18.0" layoutY="205.0">
          <image>
@@ -37,22 +36,11 @@
       </ImageView>
       <Line endX="808.3333129882812" layoutX="149.0" layoutY="120.0" startX="-100.0" />
       <TableView fx:id="reservas_maquina" layoutX="974.0" layoutY="114.0" prefHeight="593.0" prefWidth="369.0" />
-      <Text layoutX="43.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
+      <Text layoutX="129.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
          <font>
             <Font size="16.0" />
          </font></Text>
-      <DatePicker fx:id="inicio_dia" layoutX="43.0" layoutY="208.0" prefHeight="40.0" prefWidth="279.0" />
-      <TextField fx:id="inicio_hora" layoutX="383.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
-      <TextField fx:id="inicio_min" layoutX="435.0" layoutY="208.0" prefHeight="40.0" prefWidth="40.0" />
-      <Text layoutX="428.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="1.26953125">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <Text layoutX="379.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora">
-         <font>
-            <Font size="16.0" />
-         </font></Text>
+      <DatePicker fx:id="inicio_dia" layoutX="129.0" layoutY="199.0" prefHeight="40.0" prefWidth="315.0" />
       <Button fx:id="embalaje" layoutX="191.0" layoutY="378.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="64.0" prefWidth="210.0" style="-fx-background-color: none;" text="Embalaje">
          <font>
             <Font size="28.0" />
@@ -85,24 +73,12 @@
          <font>
             <Font size="28.0" />
          </font></Button>
-      <Text layoutX="526.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
+      <Text layoutX="598.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <DatePicker fx:id="fin_dia" layoutX="526.0" layoutY="211.0" prefHeight="40.0" prefWidth="279.0" />
-      <TextField fx:id="fin_hora" layoutX="866.0" layoutY="211.0" prefHeight="40.0" prefWidth="40.0" />
-      <TextField fx:id="fin_min" layoutX="918.0" layoutY="211.0" prefHeight="40.0" prefWidth="40.0" />
-      <Text layoutX="911.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" wrappingWidth="1.26953125">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
-      <Text layoutX="862.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hora">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
+      <DatePicker fx:id="fin_dia" layoutX="598.0" layoutY="199.0" prefHeight="40.0" prefWidth="315.0" />
       <Line endX="352.0" endY="-7.0" layoutX="159.0" layoutY="146.0" startX="352.0" startY="103.0" />
       <Text layoutX="185.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE RESERVA" wrappingWidth="210.0">
          <font>

@@ -8,8 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.sql.Date;
 
 import java.util.ArrayList;
@@ -304,15 +302,15 @@ public class sql {
 
     }
 
-    public void nuevareserva(LocalDate start, LocalDate end, LocalTime inicio, LocalTime fina) {
+    public void nuevareserva(LocalDate start, LocalDate end) {
         String sql = "INSERT INTO reservation_machines(user_id,serial_num,start_date,end_date) VALUES (?,?,?,?)";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, id_sesion);
             pstmt.setString(2, serail_num);
-            pstmt.setString(3, LocalDateTime.of(start, inicio).toString());
-            pstmt.setString(4, LocalDateTime.of(end, fina).toString());
+            pstmt.setString(3, (start).toString());
+            pstmt.setString(4, end.toString());
             pstmt.executeQuery();
 
         } catch (SQLException e) {
