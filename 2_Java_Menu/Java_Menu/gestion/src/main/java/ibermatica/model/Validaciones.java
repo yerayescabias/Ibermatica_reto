@@ -244,6 +244,7 @@ public class Validaciones {
             } catch (Exception e) {
                 alerta.setContentText("Fecha invalida");
                 alerta.showAndWait();
+                
                 return false;
             }
         
@@ -262,6 +263,10 @@ public class Validaciones {
             alerta.showAndWait();
             return false;
         
+        }else if (LocalDate.now().isAfter(fecha.getValue())){
+            alerta.setContentText("Esta fecha es anterior a hoy ");
+            alerta.showAndWait();
+            return false;
         }else{
             return true;
         }
