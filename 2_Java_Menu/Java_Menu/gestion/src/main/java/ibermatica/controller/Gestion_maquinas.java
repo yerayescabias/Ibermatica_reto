@@ -12,14 +12,21 @@ import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 public class Gestion_maquinas {
+    ArrayList<String> maquinas_borrar= new ArrayList<>();
     sql database = new sql();
     @FXML
     TextField n_num, n_tipo, m_num, m_tipo, m_fecha;
@@ -121,6 +128,7 @@ public class Gestion_maquinas {
         }
 
         maquinas_tabla.getItems().addAll(data);
+        tabladinamica();
 
     }
 
@@ -134,4 +142,47 @@ public class Gestion_maquinas {
         n_estado.getSelectionModel().clearSelection();
         m_estado.getSelectionModel().clearSelection();
     }
+    @FXML
+     public void tabladinamica(){
+        TableColumn actionCol = new TableColumn("Action");
+        actionCol.setCellValueFactory(new PropertyValueFactory<>(""));
+
+        Callback<TableColumn<ArrayList<String>, String>, TableCell <ArrayList<String>, String>> cellFactory =
+        new Callback<TableColumn<ArrayList<String>, String>,TableCell<ArrayList<String>, String>> () {
+            @Override
+            public TableCell call(final TableColumn<ArrayList<String>, String> param) {
+                final TableCell<ArrayList<String>, String> cell = new TableCell<ArrayList<String>, String>() {
+
+                    final Button btn = new Button("X");
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction((ActionEvent event) -> {
+                                
+                                maquinas_borrar= getTableView().getItems().get(getIndex());
+                                database.borrar_maquina(maquinas_borrar.get(0));
+                                maquinas_tabla.getItems().clear();
+                                clear();
+
+                                
+                            });
+                            
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        actionCol.setCellFactory(cellFactory);
+        maquinas_tabla.getColumns().add(actionCol);
+
+    }
+
 }

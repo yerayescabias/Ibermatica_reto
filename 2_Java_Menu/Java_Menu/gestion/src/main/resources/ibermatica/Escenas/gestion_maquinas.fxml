@@ -87,8 +87,8 @@
          <buttons>
             <Pane prefHeight="40.0" prefWidth="282.0">
                <children>
-                  <Button fx:id="Maquinas" layoutX="42.0" layoutY="7.0" mnemonicParsing="false" text="Maquinaria" onMousePressed="#radios" />
-                  <Button fx:id="Averias" layoutX="140.0" layoutY="7.0" mnemonicParsing="false" text="Averias" onMousePressed="#radios"/>
+                  <Button fx:id="Maquinas" layoutX="42.0" layoutY="7.0" mnemonicParsing="false" text="Maquinaria"  onMousePressed="#radios" />
+                  <Button fx:id="Averias" layoutX="140.0" layoutY="7.0" mnemonicParsing="false" text="Averias"  onMousePressed="#radios"/>
                </children>
             </Pane>
          </buttons>

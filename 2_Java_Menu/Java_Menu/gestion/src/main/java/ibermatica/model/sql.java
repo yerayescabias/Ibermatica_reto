@@ -476,4 +476,15 @@ public class sql {
         }
 
     }
+    public void borrar_maquina(String serial_num){
+        String sql = "Delete from machines WHERE serial_num=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, serial_num);
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
 }
