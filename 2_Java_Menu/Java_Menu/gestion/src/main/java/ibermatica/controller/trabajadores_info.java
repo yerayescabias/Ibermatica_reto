@@ -1,22 +1,18 @@
 package ibermatica.controller;
 
 import java.io.IOException;
-
-import java.sql.Time;
 import java.time.LocalDate;
-
 import java.util.Calendar;
 import java.util.TimeZone;
-
 import ibermatica.App;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 
 public class trabajadores_info {
@@ -116,8 +112,9 @@ public class trabajadores_info {
     }
     @FXML
     public void info()throws IOException{
-        App.setRoot("Usuario");
+        App.setRoot("info");
     }
+
     @FXML
     public void cambio()throws IOException{
         cambiar.setVisible(false);

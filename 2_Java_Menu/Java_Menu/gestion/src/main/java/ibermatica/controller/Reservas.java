@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import ibermatica.App;
 import ibermatica.model.Reserva;
 import ibermatica.model.Validaciones;
@@ -12,12 +13,12 @@ import ibermatica.model.sql;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Alert.AlertType;
 
 public class Reservas {
     int tipos = 0;
@@ -41,11 +42,11 @@ public class Reservas {
     @FXML
     public void initialize() throws SQLException {
         tabladereserva();
-
     }
 
     @FXML
     public void buttonpressed() throws SQLException {
+
 
         if (fin_dia.getValue() == null || inicio_dia.getValue() == null) {
             if ((procesados.isPressed())) {
@@ -158,7 +159,7 @@ public class Reservas {
         boolean reservar = true;
 
         while (rs.next()) {
-            reservas.add(new Reserva(rs.getString(2), rs.getDate(3).toLocalDate(), (rs.getDate(4).toLocalDate())));
+            reservas.add(new Reserva(rs.getString(1),rs.getString(2), rs.getDate(3).toLocalDate(), (rs.getDate(4).toLocalDate())));
         }
         int contador=0;
         for (Reserva reserva : reservas) {

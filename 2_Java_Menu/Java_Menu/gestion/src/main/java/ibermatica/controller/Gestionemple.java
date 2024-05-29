@@ -7,19 +7,26 @@ import java.util.Iterator;
 
 import javafx.scene.control.TableColumn;
 import ibermatica.App;
+import ibermatica.model.Reserva;
 import ibermatica.model.User;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.application.Platform;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class Gestionemple {
-    sql database = new sql();
+    static sql database = new sql();
     int type = 0;
     User nuevo;
     ArrayList<String> parametros = new ArrayList<>();
@@ -131,7 +138,7 @@ public class Gestionemple {
     @FXML
     public void modificar() throws NumberFormatException, SQLException {
         if (Validaciones.dni(dni_modificar,9) == false || Validaciones.telefono(telefono_modificar) == false || Validaciones.nombre(nombre_modificar)==false
-                || Validaciones.apellido( apellido_modificar, email_modificar) == false ||  Validaciones.combo(tipo_moficar)==false ||   (Validaciones.basededatos("users",dni_modificar )== true)) {
+                || Validaciones.apellido( apellido_modificar, email_modificar) == false ||  Validaciones.combo(tipo_moficar)==false ) {
         } else {
             User modifiUser = new User(dni_modificar.getText(), nombre_modificar.getText(),
                     apellido_modificar.getText(),
@@ -175,10 +182,15 @@ public class Gestionemple {
     }
 
     @FXML
-    public void borrar_usuario() {
-        database.borrar_usuario(Dni_buscar.getText());
-        clear();
-        informacion_tabla();
+    public void borrar_usuario() throws SQLException {
+        
+        if(reservas_borrado((Dni_buscar.getText()))==false){
+        }else{
+            database.borrar_usuario(Dni_buscar.getText());
+            clear();
+            informacion_tabla();
+        }
+        
     }
 
     @FXML
@@ -191,4 +203,80 @@ public class Gestionemple {
         App.setRoot("Menu_admin");
     }
 
+    
+    public boolean reservas_borrado(String id) throws SQLException{
+        ArrayList<Reserva> reserbArrayList =database.resrevas_array();
+        User eliminado = database.buscar(id);
+        int contador =0;
+        boolean verificado= true;
+        for (Reserva reserva : reserbArrayList){
+            if(reserva.getUser_id().equals(eliminado.getName())){
+                contador++;
+                verificado = false;
+            }
+        }
+
+        if (verificado==false){
+            Stage decision = new Stage();
+            Pane pane = new Pane();
+            Scene escena = new Scene(pane);
+            Label aviso = new Label("El usuario "+eliminado.getName()+" tiene " + contador+ " reservas pendientes que quieres hacer:"); 
+            HBox botones = new HBox();
+            Button eliminar = new Button("Eliminar");
+            eliminar.setOnAction((ActionEvent event)->{
+                database.borrar_usuario(eliminado.getUser_id());
+                
+            });
+            Button modificar = new Button("Modificar");
+            modificar.setOnAction((ActionEvent event)->{
+                Pane panee = new Pane();
+                Scene cambio = new Scene(panee);
+                Label label = new Label("Escoge al trabajador que le quieres pasar las reservas");
+                ComboBox combo = new ComboBox();
+                for (User user : database.users()) {
+                    if(!(user.getName().equals(eliminado.getName())) && user.getType()==1){
+                        combo.getItems().add(user.getName());
+                        clear();
+                            informacion_tabla();
+                            decision.close();
+                            
+                    }
+                        
+                    
+                }
+                
+                
+                Button aceptar= new Button("Aceptar");
+                aceptar.setOnAction((ActionEvent eveent)->{
+                    for (User user : database.users()) {
+                        if(user.getName().equals(combo.getSelectionModel().getSelectedItem().toString())){
+                            database.update_reservas(eliminado.getUser_id(),user.getUser_id());
+                            database.borrar_usuario(eliminado.getUser_id());
+                            clear();
+                            informacion_tabla();
+                            decision.close();
+                            
+                        }
+                    }
+                    
+                });
+                panee.getChildren().addAll(label,combo,aceptar);
+                decision.setScene(cambio);
+                decision.show();
+            });
+            botones.getChildren().addAll(eliminar,modificar);
+            pane.getChildren().addAll(aviso,botones);
+            botones.setLayoutX(115);
+            botones.setLayoutY(25);
+        
+            
+            decision.setScene(escena);
+            decision.show();
+            decision.setResizable(false);
+            
+
+        }
+        return false;
+        
+    }
 }

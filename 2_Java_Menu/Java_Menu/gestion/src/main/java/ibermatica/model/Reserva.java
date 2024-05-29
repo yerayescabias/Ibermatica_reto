@@ -5,13 +5,15 @@ import java.util.ArrayList;
 
 public class Reserva {
     private String maquina;
+    private String user_id;
     private LocalDate inicio;
     private LocalDate finall;
     public ArrayList<LocalDate> datas = new ArrayList<>();
-    public Reserva(String maquina, LocalDate inicio, LocalDate finall) {
+    public Reserva(String user_id,String maquina, LocalDate inicio, LocalDate finall) {
         this.maquina = maquina;
         this.inicio = inicio;
         this.finall = finall;
+        this.user_id=user_id;
     }
 
     public String getMaquina() {
@@ -64,6 +66,14 @@ public class Reserva {
             return null;
         }
         
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
 }

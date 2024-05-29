@@ -6,14 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-
-
 import ibermatica.App;
 import ibermatica.model.sql;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;

@@ -3,20 +3,31 @@ package ibermatica.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import ibermatica.controller.Gestionemple;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class Validaciones {
     static sql database = new sql();
     static boolean rellenar = true;
     static Alert alerta = new Alert(AlertType.WARNING);
+    public static Gestionemple gestionemple = new Gestionemple();
 
     public static String usuarioAUTO(String nombre, String apellido) {
         return nombre.substring(0, 3) + apellido.substring(0, 3);
@@ -272,6 +283,8 @@ public class Validaciones {
         }
 
     }
+   
+
     
     
 }

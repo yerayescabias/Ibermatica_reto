@@ -1,12 +1,10 @@
 package ibermatica.controller;
 
-
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import ibermatica.App;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
@@ -14,19 +12,22 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class Gestion_maquinas {
-    ArrayList<String> maquinas_borrar= new ArrayList<>();
+    ArrayList<String> maquinas_borrar = new ArrayList<>();
     sql database = new sql();
     @FXML
     TextField n_num, n_tipo, m_num, m_tipo, m_fecha;
@@ -42,7 +43,7 @@ public class Gestion_maquinas {
         m_estado.getItems().addAll("Operativa", "Averiada");
         n_estado.getItems().addAll("Operativa", "Averiada");
         Validaciones.limite(n_num, 10);
-        Validaciones.limite(m_num,10);
+        Validaciones.limite(m_num, 10);
     }
 
     @FXML
@@ -58,32 +59,33 @@ public class Gestion_maquinas {
 
     @FXML
     public void nuevamaquina() throws SQLException {
-        if(Validaciones.dni(n_num, 10)==false || Validaciones.nombre(n_tipo)==false || Validaciones.combo(n_estado)== false || Validaciones.basededatos("machines", n_num)==false  ){
+        if (Validaciones.dni(n_num, 10) == false || Validaciones.nombre(n_tipo) == false
+                || Validaciones.combo(n_estado) == false || Validaciones.basededatos("machines", n_num) == false) {
 
-        }else{
+        } else {
             database.insert_maquinas(n_num.getText(), n_tipo.getText(),
-        Validaciones.maquinas(n_estado.getSelectionModel().getSelectedItem().toString()));
-        m_num.setText(n_num.getText());
-        m_tipo.setText(n_tipo.getText());
-        m_fecha.setText(database.fecha(n_num.getText()));
-        m_estado.getSelectionModel().select(n_estado.getSelectionModel().getSelectedItem().toString());
-        n_num.setText("");
-        n_tipo.setText("");
-        n_estado.getSelectionModel().clearSelection();
+                    Validaciones.maquinas(n_estado.getSelectionModel().getSelectedItem().toString()));
+            m_num.setText(n_num.getText());
+            m_tipo.setText(n_tipo.getText());
+            m_fecha.setText(database.fecha(n_num.getText()));
+            m_estado.getSelectionModel().select(n_estado.getSelectionModel().getSelectedItem().toString());
+            n_num.setText("");
+            n_tipo.setText("");
+            n_estado.getSelectionModel().clearSelection();
         }
-        
 
     }
 
     @FXML
     public void modificar_maquina() {
-        if(Validaciones.dni(m_num, 10)==false || Validaciones.nombre(m_tipo)==false || Validaciones.combo(m_estado)== false || Validaciones.fechas(m_fecha)==false  ){
-            
-        }else{
-        database.modificar_maquinas(m_num.getText(), m_tipo.getText(),
-                Validaciones.maquinas(m_estado.getSelectionModel().getSelectedItem().toString()),
-                Date.valueOf(m_fecha.getText()));
-        clear();
+        if (Validaciones.dni(m_num, 10) == false || Validaciones.nombre(m_tipo) == false
+                || Validaciones.combo(m_estado) == false || Validaciones.fechas(m_fecha) == false) {
+
+        } else {
+            database.modificar_maquinas(m_num.getText(), m_tipo.getText(),
+                    Validaciones.maquinas(m_estado.getSelectionModel().getSelectedItem().toString()),
+                    Date.valueOf(m_fecha.getText()));
+            clear();
         }
 
     }
@@ -96,7 +98,6 @@ public class Gestion_maquinas {
             m_tipo.setText(rs.getString("name").toString());
             m_fecha.setText(rs.getString("adquisition_date"));
             m_estado.getSelectionModel().select(Validaciones.maquinasfromdatabase(rs.getString("status")));
-
         }
     }
 
@@ -142,13 +143,14 @@ public class Gestion_maquinas {
         n_estado.getSelectionModel().clearSelection();
         m_estado.getSelectionModel().clearSelection();
     }
+
     @FXML
-     public void tabladinamica(){
+    public void tabladinamica() {
+        
         TableColumn actionCol = new TableColumn("Action");
         actionCol.setCellValueFactory(new PropertyValueFactory<>(""));
 
-        Callback<TableColumn<ArrayList<String>, String>, TableCell <ArrayList<String>, String>> cellFactory =
-        new Callback<TableColumn<ArrayList<String>, String>,TableCell<ArrayList<String>, String>> () {
+        Callback<TableColumn<ArrayList<String>, String>, TableCell<ArrayList<String>, String>> cellFactory = new Callback<TableColumn<ArrayList<String>, String>, TableCell<ArrayList<String>, String>>() {
             @Override
             public TableCell call(final TableColumn<ArrayList<String>, String> param) {
                 final TableCell<ArrayList<String>, String> cell = new TableCell<ArrayList<String>, String>() {
@@ -163,15 +165,44 @@ public class Gestion_maquinas {
                             setText(null);
                         } else {
                             btn.setOnAction((ActionEvent event) -> {
-                                
-                                maquinas_borrar= getTableView().getItems().get(getIndex());
-                                database.borrar_maquina(maquinas_borrar.get(0));
-                                maquinas_tabla.getItems().clear();
-                                clear();
+                                int contador=0;
+                                maquinas_borrar = getTableView().getItems().get(getIndex());
+                                for (String string : database.maquinas_reservadas()) {
+                                    if (maquinas_borrar.get(1).equals(string)) {
+                                        Stage decision = new Stage();
+                                        Pane pane = new Pane();
+                                        Scene escena = new Scene(pane);
+                                        Label aviso = new Label("Se van a eliminar las reservas con este id");
+                                        HBox botones = new HBox();
+                                        Button eliminar = new Button("Eliminar");
 
-                                
+                                        eliminar.setOnAction((ActionEvent eevent) -> {
+
+                                            database.eliminar_maquinita(maquinas_borrar.get(0));
+                                            database.borrar_maquina(maquinas_borrar.get(0));
+                                            maquinas_tabla.getItems().clear();
+                                            decision.close();
+                                        });
+                                        botones.getChildren().addAll(eliminar);
+                                        pane.getChildren().addAll(aviso, botones);
+                                        botones.setLayoutX(115);
+                                        botones.setLayoutY(25);
+
+                                        decision.setScene(escena);
+                                        decision.show();
+                                        decision.setResizable(false);
+                                    }else if( database.maquinas_reservadas().size()== contador){
+                                        
+                                        database.borrar_maquina(maquinas_borrar.get(0));
+                                        maquinas_tabla.getItems().clear();
+                                    }else {
+                                        contador++;
+                                    }
+
+                                }
+
                             });
-                            
+
                             setGraphic(btn);
                             setText(null);
                         }

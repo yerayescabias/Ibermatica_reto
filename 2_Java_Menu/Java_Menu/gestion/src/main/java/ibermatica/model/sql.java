@@ -487,4 +487,37 @@ public class sql {
 
         }
     }
+    public ArrayList<Reserva> resrevas_array() throws SQLException{
+        ResultSet rs = reservasdefault(0);
+        ArrayList<Reserva> reservas_totales= new ArrayList<>(); 
+        while (rs.next()) {
+            reservas_totales.add(new Reserva(rs.getString(1),rs.getString(2), rs.getDate(3).toLocalDate(), (rs.getDate(4).toLocalDate())));
+        }
+        return reservas_totales;
+    }
+
+    public void update_reservas(String name, String cambio){
+        String sql = "Update reservation_machines set user_id = ? Where user_id=?";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, cambio);
+            pstmt.setString(2, name);
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+    public void eliminar_maquinita(String id){
+        String sql = "Delete From reservation_machines Where serial = ? ";
+        try (Connection conn = konektatu();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id);
+            pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+    }
 }
