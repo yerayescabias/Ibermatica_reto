@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import ibermatica.App;
+import ibermatica.model.Reserva;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
 import javafx.application.Platform;
@@ -28,7 +29,7 @@ import javafx.util.Callback;
 
 public class Gestion_maquinas {
     ArrayList<String> maquinas_borrar = new ArrayList<>();
-    sql database = new sql();
+     static public sql database = new sql();
     @FXML
     TextField n_num, n_tipo, m_num, m_tipo, m_fecha;
     @FXML
@@ -165,10 +166,16 @@ public class Gestion_maquinas {
                             setText(null);
                         } else {
                             btn.setOnAction((ActionEvent event) -> {
-                                int contador=0;
+                                boolean a=true;
                                 maquinas_borrar = getTableView().getItems().get(getIndex());
-                                for (String string : database.maquinas_reservadas()) {
-                                    if (maquinas_borrar.get(1).equals(string)) {
+                                try {
+                                    ArrayList<Reserva> reservas = database.resrevas_array();
+                                    for (Reserva string : reservas) {
+                                        if (maquinas_borrar.get(1).equals(string.getMaquina())) {
+                                            a=false;
+                                        }
+                                    }
+                                    if(a==false){
                                         Stage decision = new Stage();
                                         Pane pane = new Pane();
                                         Scene escena = new Scene(pane);
@@ -191,17 +198,17 @@ public class Gestion_maquinas {
                                         decision.setScene(escena);
                                         decision.show();
                                         decision.setResizable(false);
-                                    }else if( database.maquinas_reservadas().size()== contador){
-                                        
-                                        database.borrar_maquina(maquinas_borrar.get(0));
-                                        maquinas_tabla.getItems().clear();
-                                    }else {
-                                        contador++;
+                                    }else{
+                                            database.borrar_maquina(maquinas_borrar.get(0));
+                                            maquinas_tabla.getItems().clear();
                                     }
-
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
                                 }
-
-                            });
+                                
+    
+                                });
+                                
 
                             setGraphic(btn);
                             setText(null);

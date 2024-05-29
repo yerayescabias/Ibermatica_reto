@@ -510,7 +510,7 @@ public class sql {
     }
 
     public void eliminar_maquinita(String id){
-        String sql = "Delete From reservation_machines Where serial = ? ";
+        String sql = "Delete From reservation_machines Where serial_num = ? ";
         try (Connection conn = konektatu();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
