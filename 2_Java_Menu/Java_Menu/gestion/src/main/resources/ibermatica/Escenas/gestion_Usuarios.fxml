@@ -17,81 +17,81 @@
    <children>
       <TabPane layoutX="-7.0" layoutY="-8.0" prefHeight="764.0" prefWidth="1357.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Alta Usuario">
+          <Tab fx:id="gu_alta" text="Alta Usuario">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="dni_alta" layoutX="155.0" layoutY="159.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el DNI" />
-                        <TextField fx:id="nombre_alta" layoutX="155.0" layoutY="236.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el nombre" />
-                        <TextField fx:id="apellido_alta" layoutX="155.0" layoutY="314.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el apellido" />
-                        <TextField fx:id="telefono_alta" layoutX="155.0" layoutY="394.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el telefono" />
-                        <TextField fx:id="email_alta" layoutX="156.0" layoutY="470.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el email" />
-                        <Text layoutX="160.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:">
+                        <TextField fx:id="gu_al_dni" layoutX="155.0" layoutY="159.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el DNI" />
+                        <TextField fx:id="gu_al_nombre" layoutX="155.0" layoutY="236.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el nombre" />
+                        <TextField fx:id="gu_al_apellido" layoutX="155.0" layoutY="314.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el apellido" />
+                        <TextField fx:id="gu_al_telefono" layoutX="155.0" layoutY="394.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el telefono" />
+                        <TextField fx:id="gu_al_email" layoutX="156.0" layoutY="470.0" prefHeight="38.0" prefWidth="279.0" promptText="Inserta el email" />
+                        <Text fx:id="gu_dni" layoutX="160.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <Text layoutX="157.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+                        <Text fx:id="gu_nombre" layoutX="157.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <Text layoutX="154.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:">
+                        <Text fx:id="gu_apellido" layoutX="154.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <Text layoutX="155.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono:">
+                        <Text fx:id="gu_telefono" layoutX="155.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono:">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <Text layoutX="156.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+                        <Text fx:id="gu_email" layoutX="156.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <ComboBox fx:id="tipo_alta" layoutX="156.0" layoutY="546.0" prefHeight="38.0" prefWidth="279.0" promptText="Escoge el tipo" />
-                        <Text layoutX="156.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" wrappingWidth="68.54752349853516">
+                        <ComboBox fx:id="gu_al_tipo" layoutX="156.0" layoutY="546.0" prefHeight="38.0" prefWidth="279.0" promptText="Escoge el tipo" />
+                        <Text fx:id="gu_tipo" layoutX="156.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" wrappingWidth="68.54752349853516">
                            <font>
                               <Font size="16.0" />
                            </font></Text>
-                        <Button fx:id="dar_alta" layoutX="549.0" layoutY="284.0" mnemonicParsing="false" onAction="#alta" prefHeight="40.0" prefWidth="121.0" text="Dar alta">
+                        <Button fx:id="gu_al_daralta" layoutX="549.0" layoutY="284.0" mnemonicParsing="false" onAction="#alta" prefHeight="40.0" prefWidth="121.0" text="Dar alta">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <Button fx:id="clear" layoutX="529.0" layoutY="345.0" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="166.0" text="Reiniciar valores">
+                        <Button fx:id="gu_clear" layoutX="529.0" layoutY="345.0" mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="166.0" text="Reiniciar valores">
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <Button fx:id="modificar" layoutX="549.0" layoutY="407.0" mnemonicParsing="false" onAction="#modificar" prefHeight="40.0" prefWidth="121.0" text="Modificar">
+                        <Button fx:id="gu_modificiar" layoutX="549.0" layoutY="407.0" mnemonicParsing="false" onAction="#modificar" prefHeight="40.0" prefWidth="121.0" text="Modificar">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
-                        <TextField fx:id="apellido_modificar" layoutX="1050.0" layoutY="327.0" prefHeight="40.0" prefWidth="300.0" promptText="Apellido">
+                        <TextField fx:id="gu_mo_apellido" layoutX="1050.0" layoutY="327.0" prefHeight="40.0" prefWidth="300.0" promptText="Apellido">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="nombre_modificar" layoutX="744.0" layoutY="327.0" prefHeight="40.0" prefWidth="300.0" promptText="Nombre">
+                        <TextField fx:id="gu_mo_nombre" layoutX="744.0" layoutY="327.0" prefHeight="40.0" prefWidth="300.0" promptText="Nombre">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="telefono_modificar" layoutX="744.0" layoutY="373.0" prefHeight="40.0" prefWidth="300.0" promptText="Telefono">
+                        <TextField fx:id="gu_mo_telefono" layoutX="744.0" layoutY="373.0" prefHeight="40.0" prefWidth="300.0" promptText="Telefono">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="email_modificar" layoutX="1050.0" layoutY="372.0" prefHeight="40.0" prefWidth="300.0" promptText="Email">
+                        <TextField fx:id="gu_mo_email" layoutX="1050.0" layoutY="372.0" prefHeight="40.0" prefWidth="300.0" promptText="Email">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="usuario_modificar" layoutX="744.0" layoutY="424.0" prefHeight="40.0" prefWidth="300.0" promptText="Usuario">
+                        <TextField fx:id="gu_mo_usuario" layoutX="744.0" layoutY="424.0" prefHeight="40.0" prefWidth="300.0" promptText="Usuario">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="contraseña_modificar" layoutX="1050.0" layoutY="424.0" prefHeight="40.0" prefWidth="300.0" promptText="Contraseña">
+                        <TextField fx:id="gu_mo_contraseña" layoutX="1050.0" layoutY="424.0" prefHeight="40.0" prefWidth="300.0" promptText="Contraseña">
                            <font>
                               <Font size="18.0" />
                            </font></TextField>
-                        <TextField fx:id="dni_modificar" alignment="CENTER" layoutX="896.0" layoutY="272.0" onAction="#modificar_rellenar" prefHeight="40.0" prefWidth="300.0" promptText="Inserta el DNI para buscar">
+                        <TextField fx:id="gu_mo_dni" alignment="CENTER" layoutX="896.0" layoutY="272.0" onAction="#modificar_rellenar" prefHeight="40.0" prefWidth="300.0" promptText="Inserta el DNI para buscar">
                            <font>
                               <Font size="15.0" />
                            </font></TextField>
-                        <ComboBox fx:id="tipo_moficar" layoutX="871.0" layoutY="482.0" prefHeight="48.0" prefWidth="333.0" promptText="Tipo" />
+                        <ComboBox fx:id="gu_mo_tipo" layoutX="871.0" layoutY="482.0" prefHeight="48.0" prefWidth="333.0" promptText="Tipo" />
                         <ImageView fitHeight="171.0" fitWidth="171.0" layoutX="953.0" layoutY="71.0">
                            <image>
                               <Image url="@../imagenes/icon.png" />
@@ -106,17 +106,17 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab onSelectionChanged="#informacion_tabla" text="Baja Usuario">
+          <Tab fx:id="gu_baja" onSelectionChanged="#informacion_tabla" text="Baja Usuario">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="Tabla" layoutX="21.0" layoutY="136.0" prefHeight="501.0" prefWidth="1298.0" />
-                        <TextField fx:id="Dni_buscar" layoutX="33.0" layoutY="84.0" onAction="#tabla_dni" prefHeight="40.0" prefWidth="309.0" promptText="Inserta el DNI" />
-                        <Label layoutX="34.0" layoutY="50.0" text="DNI">
+                        <TextField fx:id="gu_ba_dnibuscar" layoutX="33.0" layoutY="84.0" onAction="#tabla_dni" prefHeight="40.0" prefWidth="309.0" promptText="Inserta el DNI" />
+                        <Label fx:id="gu_ba_dni" layoutX="34.0" layoutY="50.0" text="DNI">
                            <font>
                               <Font size="18.0" />
                            </font></Label>
-                        <Button fx:id="eliminar" layoutX="394.0" layoutY="84.0" mnemonicParsing="false" onAction="#borrar_usuario" prefHeight="40.0" prefWidth="171.0" text="Eliminar">
+                        <Button fx:id="gu_ba_eliminar" layoutX="394.0" layoutY="84.0" mnemonicParsing="false" onAction="#borrar_usuario" prefHeight="40.0" prefWidth="171.0" text="Eliminar">
                            <font>
                               <Font size="18.0" />
                            </font></Button>
@@ -136,5 +136,15 @@
             <Font size="17.0" />
          </font>
       </Button>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1266.0" layoutY="20.0" onMouseClicked="#Español">
+         <image>
+            <Image url="@../imagenes/espanol.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1222.0" layoutY="20.0" onMouseClicked="#Ingles">
+         <image>
+            <Image url="@../imagenes/INGLES.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

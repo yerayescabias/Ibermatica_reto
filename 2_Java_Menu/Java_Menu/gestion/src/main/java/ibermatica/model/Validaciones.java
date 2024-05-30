@@ -107,7 +107,7 @@ public class Validaciones {
     public static boolean dni(TextField dni, int maximo) {
         final int maximus=maximo-1;
         if (dni.getText().isEmpty()) {
-            alerta.setContentText("Rellena el dni");
+            alerta.setContentText("Rellena el perimer campo");
             alerta.showAndWait();
             dni.setText("");
             return false;

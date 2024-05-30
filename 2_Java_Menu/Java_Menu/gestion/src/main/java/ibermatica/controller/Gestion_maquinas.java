@@ -9,6 +9,7 @@ import ibermatica.App;
 import ibermatica.model.Reserva;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
@@ -24,11 +25,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class Gestion_maquinas {
     ArrayList<String> maquinas_borrar = new ArrayList<>();
+    Idioma idioma ;
      static public sql database = new sql();
     @FXML
     TextField n_num, n_tipo, m_num, m_tipo, m_fecha;
@@ -37,7 +40,10 @@ public class Gestion_maquinas {
     @FXML
     TableView maquinas_tabla;
     @FXML
-    Button Maquinas, Averias;
+    Button gm_maquinaria,gm_averias,gm_nueva,gm_modificar;
+    @FXML
+    Text gm_gestionmaquinaria,gm_n_numero,gm_n_tipoma,gm_n_estadoma,gm_m_numero,gm_m_tipoma,gm_m_estadoma,gm_m_fechaad;
+
 
     @FXML
     public void initialize() {
@@ -45,6 +51,7 @@ public class Gestion_maquinas {
         n_estado.getItems().addAll("Operativa", "Averiada");
         Validaciones.limite(n_num, 10);
         Validaciones.limite(m_num, 10);
+        idioma(idioma.idioma_default());
     }
 
     @FXML
@@ -106,7 +113,7 @@ public class Gestion_maquinas {
     @FXML
     public void radios() throws SQLException {
 
-        ResultSet rs = database.tablas(Maquinas, Averias);
+        ResultSet rs = database.tablas(gm_maquinaria, gm_averias);
         maquinas_tabla.getColumns().clear();
         maquinas_tabla.getItems().clear();
 
@@ -223,4 +230,19 @@ public class Gestion_maquinas {
 
     }
 
+     @FXML
+    public void Español(){
+        idioma("Español");
+    }
+    @FXML
+    public void Ingles(){
+        idioma("Ingles");
+    }
+    public void idioma(String lenguaje){
+         idioma = new Idioma(lenguaje);
+        Button[] butones={gm_maquinaria,gm_averias,gm_nueva,gm_modificar};
+        idioma.botones(butones);
+        Text[] textos={ gm_gestionmaquinaria,gm_n_numero,gm_n_tipoma,gm_n_estadoma,gm_m_numero,gm_m_tipoma,gm_m_estadoma,gm_m_fechaad};
+        idioma.text(textos);
+    }
 }

@@ -7,16 +7,20 @@ import java.util.TimeZone;
 import ibermatica.App;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class trabajadores_info {
     sql database = new sql();
+    Idioma idioma ;
     int cont=0;
     String id_inicio = sql.id_sesion;
     @FXML
@@ -27,11 +31,16 @@ public class trabajadores_info {
     TextField contraseña_antigua, contraseña_nueva, contraseña_confir;
     @FXML
     PasswordField contraseña;
+    @FXML
+    Text pe_conosotros,pe_anos,pe_resevas,pe_ocupacion,pe_telefono,pe_dni,pe_email,pe_usuario,pe_contra,cc_ca,cc_cn,cc_cdc;
+    @FXML
+    Button  cc_cambiar,cc_atras,pe_cc,pe_info,pe_mr,pe_atras,pe_cs;
 
     public void initialize() {
         info.setVisible(true);
         cambiar.setVisible(false);
         set_valores();
+        idioma(idioma.idioma_default());
     }
 
     
@@ -119,5 +128,21 @@ public class trabajadores_info {
     public void cambio()throws IOException{
         cambiar.setVisible(false);
         info.setVisible(true);
+    }
+    @FXML
+    public void Español(){
+        idioma("Español");
+    }
+    @FXML
+    public void Ingles(){
+        idioma("Ingles");
+    }
+    public void idioma(String lenguaje){
+        idioma = new Idioma(lenguaje);
+        Text[] textos = { pe_conosotros,pe_anos,pe_resevas,pe_ocupacion,pe_telefono,pe_dni,pe_email,pe_usuario,pe_contra,cc_ca,cc_cn,cc_cdc};
+        idioma.text(textos);
+        Button[] buttones={cc_cambiar,cc_atras,pe_cc,pe_info,pe_mr,pe_atras,pe_cs};
+        idioma.botones(buttones);
+
     }
 }

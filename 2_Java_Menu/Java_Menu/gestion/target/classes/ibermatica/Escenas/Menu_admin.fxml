@@ -9,19 +9,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" stylesheets="@../Estilos/Admin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.Menu_admin">
    <children>
-      <Button fx:id="gestion" layoutX="549.0" layoutY="290.0" mnemonicParsing="false" onAction="#gestion" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Gestion de usuarios">
+      <Button fx:id="am_gestion" layoutX="549.0" layoutY="290.0" mnemonicParsing="false" onAction="#gestion" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Gestion de usuarios">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="estado" layoutX="549.0" layoutY="372.0" mnemonicParsing="false" onAction="#estado" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Estado de las maquinas">
+      <Button fx:id="am_estado" layoutX="549.0" layoutY="372.0" mnemonicParsing="false" onAction="#estado" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Estado de las maquinas">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="visualizar" layoutX="549.0" layoutY="453.0" mnemonicParsing="false" onAction="#visualizar" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Visulizar datos">
+      <Button fx:id="am_visualizar" layoutX="549.0" layoutY="453.0" mnemonicParsing="false" onAction="#visualizar" prefHeight="40.0" prefWidth="300.0" stylesheets="@../Estilos/Admin.css" text="Visulizar datos">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Text layoutX="380.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: georgia; -fx-color: #7AA2E3;" text="ADMIN MENU" textAlignment="CENTER" wrappingWidth="637.453125">
+      <Text fx:id="am_adminmenu" layoutX="380.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: georgia; -fx-color: #7AA2E3;" text="ADMIN MENU" textAlignment="CENTER" wrappingWidth="637.453125">
          <font>
             <Font name="System Bold" size="71.0" />
          </font>
@@ -34,6 +34,16 @@
       <ImageView fitHeight="70.0" fitWidth="68.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#cerrarsesion">
          <image>
             <Image url="@../imagenes/user_logout.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1176.0" layoutY="15.0" onMouseClicked="#Ingles">
+         <image>
+            <Image url="@../imagenes/INGLES.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1224.0" layoutY="15.0" onMouseClicked="#Español">
+         <image>
+            <Image url="@../imagenes/espanol.png" />
          </image>
       </ImageView>
    </children>

@@ -10,12 +10,15 @@ import ibermatica.App;
 import ibermatica.model.Reserva;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,80 +27,81 @@ public class Reservas {
     int tipos = 0;
     sql database = new sql();
     Reserva reserva;
+    Idioma idioma ;
     ArrayList<Reserva> reservas = new ArrayList<>();
-
     @FXML
-    Button procesados, embalaje, tornos, freasoras, lijadoras, selladora, soldadura, hornos;
+    MenuItem re_mis_reservas,re_perfil,re_cerrar_sesion;
+    @FXML
+    Text re_reservas,re_iniciore,re_finre,re_iniciodia,re_findia;
+    @FXML
+    Button re_procesados, re_embalaje, re_tornos, re_freasoras, re_lijadoras, re_selladora, re_soldadura, re_hornos;
     @FXML
     ResultSet rs;
     @FXML
     TableView reservas_maquina;
-
     @FXML
-    MenuItem mis_reservas, perfil;
-
-    @FXML
-    DatePicker fin_dia, inicio_dia;
+    DatePicker re_fin_dia, re_inicio_dia;
 
     @FXML
     public void initialize() throws SQLException {
         tabladereserva();
+        idioma(idioma.idioma_default());
     }
 
     @FXML
     public void buttonpressed() throws SQLException {
 
 
-        if (fin_dia.getValue() == null || inicio_dia.getValue() == null) {
-            if ((procesados.isPressed())) {
-                rs = database.reservas(procesados.getText(), tipos);
+        if (re_fin_dia.getValue() == null || re_inicio_dia.getValue() == null) {
+            if ((re_procesados.isPressed())) {
+                rs = database.reservas(re_procesados.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (embalaje.isPressed()) {
-                rs = database.reservas(embalaje.getText(), tipos);
+            } else if (re_embalaje.isPressed()) {
+                rs = database.reservas(re_embalaje.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (tornos.isPressed()) {
-                rs = database.reservas(tornos.getText(), tipos);
+            } else if (re_tornos.isPressed()) {
+                rs = database.reservas(re_tornos.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (freasoras.isPressed()) {
-                rs = database.reservas(freasoras.getText(), tipos);
+            } else if (re_freasoras.isPressed()) {
+                rs = database.reservas(re_freasoras.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (lijadoras.isPressed()) {
-                rs = database.reservas(lijadoras.getText(), tipos);
+            } else if (re_lijadoras.isPressed()) {
+                rs = database.reservas(re_lijadoras.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (selladora.isPressed()) {
-                rs = database.reservas(selladora.getText(), tipos);
+            } else if (re_selladora.isPressed()) {
+                rs = database.reservas(re_selladora.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (soldadura.isPressed()) {
-                rs = database.reservas(soldadura.getText(), tipos);
+            } else if (re_soldadura.isPressed()) {
+                rs = database.reservas(re_soldadura.getText(), tipos);
                 reservas_tabla(rs);
-            } else if (hornos.isPressed()) {
-                rs = database.reservas(hornos.getText(), tipos);
+            } else if (re_hornos.isPressed()) {
+                rs = database.reservas(re_hornos.getText(), tipos);
                 reservas_tabla(rs);
             }
         } else {
-            if (Validaciones.horas(inicio_dia, fin_dia) == false) {
+            if (Validaciones.horas(re_inicio_dia, re_fin_dia) == false) {
 
             } else {
-                if ((procesados.isPressed())) {
-                    reservas(procesados.getText());
+                if ((re_procesados.isPressed())) {
+                    reservas(re_procesados.getText());
 
-                } else if (embalaje.isPressed()) {
-                    reservas(embalaje.getText());
+                } else if (re_embalaje.isPressed()) {
+                    reservas(re_embalaje.getText());
                     clear();
-                } else if (tornos.isPressed()) {
-                    reservas(tornos.getText());
+                } else if (re_tornos.isPressed()) {
+                    reservas(re_tornos.getText());
                     clear();
-                } else if (freasoras.isPressed()) {
-                    reservas(freasoras.getText());
-                } else if (lijadoras.isPressed()) {
-                    reservas(lijadoras.getText());
-                } else if (selladora.isPressed()) {
-                    reservas(selladora.getText());
-                } else if (soldadura.isPressed()) {
-                    reservas(soldadura.getText());
+                } else if (re_freasoras.isPressed()) {
+                    reservas(re_freasoras.getText());
+                } else if (re_lijadoras.isPressed()) {
+                    reservas(re_lijadoras.getText());
+                } else if (re_selladora.isPressed()) {
+                    reservas(re_selladora.getText());
+                } else if (re_soldadura.isPressed()) {
+                    reservas(re_soldadura.getText());
 
-                } else if (hornos.isPressed()) {
-                    reservas(hornos.getText());
+                } else if (re_hornos.isPressed()) {
+                    reservas(re_hornos.getText());
                 }
             }
 
@@ -128,8 +132,8 @@ public class Reservas {
     }
 
     public void clear() {
-        fin_dia.setValue(null);
-        inicio_dia.setValue(null);
+        re_fin_dia.setValue(null);
+        re_inicio_dia.setValue(null);
     }
 
     public void tabladereserva() throws SQLException {
@@ -169,12 +173,12 @@ public class Reservas {
 
                 for (LocalDate fechas : datas) {
 
-                    if (fechas.equals(inicio_dia.getValue()) && contador == 0
-                            || fechas.equals(fin_dia.getValue()) && contador == 0) {
+                    if (fechas.equals(re_inicio_dia.getValue()) && contador == 0
+                            || fechas.equals(re_fin_dia.getValue()) && contador == 0) {
                         mal.setContentText("Esos dias ya hay una reserva de esa maquina");
                         mal.showAndWait();
-                        fin_dia.setValue(null);
-                        inicio_dia.setValue(null);
+                        re_fin_dia.setValue(null);
+                        re_inicio_dia.setValue(null);
                         reservar = false;
                         contador++;
                         break;
@@ -185,7 +189,7 @@ public class Reservas {
         }
         if (reservar) {
             database.serial_num(maquina);
-            database.nuevareserva(inicio_dia.getValue(), fin_dia.getValue());
+            database.nuevareserva(re_inicio_dia.getValue(), re_fin_dia.getValue());
             rs = database.reservas(maquina, tipos);
             reservas_tabla(rs);
             clear();
@@ -206,5 +210,23 @@ public class Reservas {
     @FXML
     public void atras() throws IOException {
         App.setRoot("Inicio");
+    }
+
+     @FXML
+    public void Español(){
+        idioma("Español");
+    }
+    @FXML
+    public void Ingles(){
+        idioma("Ingles");
+    }
+    public void idioma(String lenguaje){
+        idioma = new Idioma(lenguaje);
+        Button[] buttones={re_procesados, re_embalaje, re_tornos, re_freasoras, re_lijadoras, re_selladora, re_soldadura, re_hornos};
+        idioma.botones(buttones);
+        MenuItem[] menuitems={re_mis_reservas,re_perfil,re_cerrar_sesion};
+        idioma.menu_item(menuitems);
+        Text[] textos={ re_reservas,re_iniciore,re_finre,re_iniciodia,re_findia};
+        idioma.text(textos);
     }
 }

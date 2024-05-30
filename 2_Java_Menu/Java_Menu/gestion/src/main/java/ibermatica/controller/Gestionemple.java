@@ -11,6 +11,7 @@ import ibermatica.model.Reserva;
 import ibermatica.model.User;
 import ibermatica.model.Validaciones;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +19,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Gestionemple {
@@ -31,20 +34,30 @@ public class Gestionemple {
     User nuevo;
     ArrayList<String> parametros = new ArrayList<>();
     boolean validaciones = true;
+    Idioma idioma ;
 
     @FXML
-    TextField dni_alta, nombre_alta, apellido_alta, telefono_alta, email_alta, apellido_modificar, nombre_modificar,
-            telefono_modificar, email_modificar, usuario_modificar, contraseña_modificar, dni_modificar, Dni_buscar;
+    TextField gu_al_dni, gu_al_nombre, gu_al_apellido, gu_al_telefono, gu_al_email, gu_mo_apellido, gu_mo_nombre,
+            gu_mo_telefono, gu_mo_email, gu_mo_usuario, gu_mo_contraseña, gu_mo_dni, gu_ba_dnibuscar;
 
     @FXML
-    ComboBox tipo_alta, tipo_moficar;
+    ComboBox gu_al_tipo, gu_mo_tipo;
+
+    @FXML
+    Tab gu_baja,gu_alta;
+
+    @FXML
+    Button gu_ba_eliminar,gu_al_daralta,gu_clear,gu_modificiar; 
 
     @FXML
     TableView Tabla;
 
+    @FXML
+    Text gu_dni,gu_nombre,gu_apellido,gu_telefono,gu_email,gu_tipo;
+
     public void initialize() {
-        tipo_alta.getItems().addAll("Oficinista", "Obrero");
-        tipo_moficar.getItems().addAll("Oficinista", "Obrero");
+        gu_al_tipo.getItems().addAll("Oficinista", "Obrero");
+        gu_mo_tipo.getItems().addAll("Oficinista", "Obrero");
         TableColumn<User, String> columna1 = new TableColumn<>("DNI");
         columna1.setCellValueFactory(new PropertyValueFactory<>("user_id"));
         TableColumn<User, String> columna2 = new TableColumn<>("Nombre");
@@ -69,82 +82,83 @@ public class Gestionemple {
         Tabla.getColumns().add(columna6);
         Tabla.getColumns().add(columna7);
         Tabla.getColumns().add(columna8);
-        Validaciones.limite(dni_alta,9);
-        Validaciones.limitetelefono(telefono_alta);
-        Validaciones.limite(dni_modificar,9);
-        Validaciones.limitetelefono(telefono_modificar);
-        Validaciones.limite(Dni_buscar,9);
+        Validaciones.limite(gu_al_dni,9);
+        Validaciones.limitetelefono(gu_al_telefono);
+        Validaciones.limite(gu_mo_dni,9);
+        Validaciones.limitetelefono(gu_mo_telefono);
+        Validaciones.limite(gu_ba_dnibuscar,9);
+        idioma(idioma.idioma_default());
     }
 
     @FXML
     public void alta() throws NumberFormatException, SQLException {
 
-        if (Validaciones.dni(dni_alta,9) == false || Validaciones.telefono(telefono_alta) == false || Validaciones.nombre(nombre_alta)==false
-                || Validaciones.apellido( apellido_alta, email_alta) == false ||  Validaciones.combo(tipo_alta)==false||(Validaciones.basededatos("users",dni_alta )== true)){
+        if (Validaciones.dni(gu_al_dni,9) == false || Validaciones.telefono(gu_al_telefono) == false || Validaciones.nombre(gu_al_nombre)==false
+                || Validaciones.apellido( gu_al_apellido, gu_al_email) == false ||  Validaciones.combo(gu_al_tipo)==false||(Validaciones.basededatos("users",gu_al_dni )== true)){
                     
 
         } else {
-            nuevo = new User(dni_alta.getText(), nombre_alta.getText(), apellido_alta.getText(), email_alta.getText(),
-                    Integer.parseInt(telefono_alta.getText()),
-                    Validaciones.usuarioAUTO(nombre_alta.getText(), apellido_alta.getText()),
-                    Validaciones.contraseñasAUTO(nombre_alta.getText()), Validaciones.input_tipo(tipo_alta));
+            nuevo = new User(gu_al_dni.getText(), gu_al_nombre.getText(), gu_al_apellido.getText(), gu_al_email.getText(),
+                    Integer.parseInt(gu_al_telefono.getText()),
+                    Validaciones.usuarioAUTO(gu_al_nombre.getText(), gu_al_apellido.getText()),
+                    Validaciones.contraseñasAUTO(gu_al_nombre.getText()), Validaciones.input_tipo(gu_al_tipo));
             database.usersADD(nuevo);
 
             clear();
-            apellido_modificar.setText(nuevo.getSurname());
-            nombre_modificar.setText(nuevo.getName());
-            telefono_modificar.setText(String.valueOf(nuevo.getTelefono()));
-            email_modificar.setText(nuevo.getEmail());
-            usuario_modificar.setText(nuevo.getUsername());
-            contraseña_modificar.setText(nuevo.getPassword());
-            dni_modificar.setText(nuevo.getUser_id());
-            tipo_moficar.getSelectionModel().select(Validaciones.tipo(nuevo));
+            gu_mo_apellido.setText(nuevo.getSurname());
+            gu_mo_nombre.setText(nuevo.getName());
+            gu_mo_telefono.setText(String.valueOf(nuevo.getTelefono()));
+            gu_mo_email.setText(nuevo.getEmail());
+            gu_mo_usuario.setText(nuevo.getUsername());
+            gu_mo_contraseña.setText(nuevo.getPassword());
+            gu_mo_dni.setText(nuevo.getUser_id());
+            gu_mo_tipo.getSelectionModel().select(Validaciones.tipo(nuevo));
         }
 
     }
 
     @FXML
     public void clear() {
-        dni_alta.setText("");
-        nombre_alta.setText("");
-        apellido_alta.setText("");
-        telefono_alta.setText("");
-        email_alta.setText("");
-        tipo_alta.getSelectionModel().clearSelection();
-        apellido_modificar.setText("");
-        nombre_modificar.setText("");
-        telefono_modificar.setText("");
-        email_modificar.setText("");
-        usuario_modificar.setText("");
-        contraseña_modificar.setText("");
-        dni_modificar.setText("");
-        tipo_moficar.getSelectionModel().clearSelection();
-        Dni_buscar.setText("");
+        gu_al_dni.setText("");
+        gu_al_nombre.setText("");
+        gu_al_apellido.setText("");
+        gu_al_telefono.setText("");
+        gu_al_email.setText("");
+        gu_al_tipo.getSelectionModel().clearSelection();
+        gu_mo_apellido.setText("");
+        gu_mo_nombre.setText("");
+        gu_mo_telefono.setText("");
+        gu_mo_email.setText("");
+        gu_mo_usuario.setText("");
+        gu_mo_contraseña.setText("");
+        gu_mo_dni.setText("");
+        gu_mo_tipo.getSelectionModel().clearSelection();
+        gu_ba_dnibuscar.setText("");
     }
 
     @FXML
     public void modificar_rellenar() {
-        User modibusca = database.buscar(dni_modificar.getText());
-        apellido_modificar.setText(modibusca.getSurname());
-        nombre_modificar.setText(modibusca.getName());
-        telefono_modificar.setText(String.valueOf(modibusca.getTelefono()));
-        email_modificar.setText(modibusca.getEmail());
-        usuario_modificar.setText(modibusca.getUsername());
-        contraseña_modificar.setText(modibusca.getPassword());
-        tipo_moficar.getSelectionModel().select(Validaciones.tipo(modibusca));
+        User modibusca = database.buscar(gu_mo_dni.getText());
+        gu_mo_apellido.setText(modibusca.getSurname());
+        gu_mo_nombre.setText(modibusca.getName());
+        gu_mo_telefono.setText(String.valueOf(modibusca.getTelefono()));
+        gu_mo_email.setText(modibusca.getEmail());
+        gu_mo_usuario.setText(modibusca.getUsername());
+        gu_mo_contraseña.setText(modibusca.getPassword());
+        gu_mo_tipo.getSelectionModel().select(Validaciones.tipo(modibusca));
 
     }
 
     @FXML
     public void modificar() throws NumberFormatException, SQLException {
-        if (Validaciones.dni(dni_modificar,9) == false || Validaciones.telefono(telefono_modificar) == false || Validaciones.nombre(nombre_modificar)==false
-                || Validaciones.apellido( apellido_modificar, email_modificar) == false ||  Validaciones.combo(tipo_moficar)==false ) {
+        if (Validaciones.dni(gu_mo_dni,9) == false || Validaciones.telefono(gu_mo_telefono) == false || Validaciones.nombre(gu_mo_nombre)==false
+                || Validaciones.apellido( gu_mo_apellido, gu_mo_email) == false ||  Validaciones.combo(gu_mo_tipo)==false ) {
         } else {
-            User modifiUser = new User(dni_modificar.getText(), nombre_modificar.getText(),
-                    apellido_modificar.getText(),
-                    email_modificar.getText(), Integer.parseInt(telefono_modificar.getText()),
-                    Validaciones.usuarioAUTO(nombre_modificar.getText(), apellido_modificar.getText()),
-                    Validaciones.contraseñasAUTO(nombre_modificar.getText()), Validaciones.input_tipo(tipo_moficar));
+            User modifiUser = new User(gu_mo_dni.getText(), gu_mo_nombre.getText(),
+                    gu_mo_apellido.getText(),
+                    gu_mo_email.getText(), Integer.parseInt(gu_mo_telefono.getText()),
+                    Validaciones.usuarioAUTO(gu_mo_nombre.getText(), gu_mo_apellido.getText()),
+                    Validaciones.contraseñasAUTO(gu_mo_nombre.getText()), Validaciones.input_tipo(gu_mo_tipo));
             database.modificar(modifiUser);
             clear();
         }
@@ -153,11 +167,11 @@ public class Gestionemple {
 
     @FXML
     public void tabla_dni() {
-        if (Validaciones.dni(Dni_buscar,9) == false) {
+        if (Validaciones.dni(gu_ba_dnibuscar,9) == false) {
 
         } else {
             Tabla.getItems().clear();
-            Tabla.getItems().add(database.buscar(Dni_buscar.getText()));
+            Tabla.getItems().add(database.buscar(gu_ba_dnibuscar.getText()));
         }
 
     }
@@ -184,9 +198,9 @@ public class Gestionemple {
     @FXML
     public void borrar_usuario() throws SQLException {
         
-        if(reservas_borrado((Dni_buscar.getText()))==false){
+        if(reservas_borrado((gu_ba_dnibuscar.getText()))==false){
         }else{
-            database.borrar_usuario(Dni_buscar.getText());
+            database.borrar_usuario(gu_ba_dnibuscar.getText());
             clear();
             informacion_tabla();
         }
@@ -278,5 +292,29 @@ public class Gestionemple {
         }
         return false;
         
+    }
+     @FXML
+    public void Español() {
+        idioma("Español");
+    }
+
+    @FXML
+    public void Ingles() {
+        idioma("Ingles");
+    }
+
+    public void idioma(String lenguaje){
+        idioma = new Idioma(lenguaje);
+        Tab[] tabs={gu_baja,gu_alta};
+        idioma.tab(tabs);
+        Text[] textos={gu_dni,gu_nombre,gu_apellido,gu_telefono,gu_email,gu_tipo};
+        idioma.text(textos);
+        ComboBox[] combo={gu_al_tipo, gu_mo_tipo};
+        idioma.combo(combo);
+        TextField[] field={gu_al_dni, gu_al_nombre, gu_al_apellido, gu_al_telefono, gu_al_email, gu_mo_apellido, gu_mo_nombre,
+            gu_mo_telefono, gu_mo_email, gu_mo_usuario, gu_mo_contraseña, gu_mo_dni, gu_ba_dnibuscar};
+        idioma.textfield(field);
+        Button[] button={gu_ba_eliminar,gu_al_daralta,gu_clear,gu_modificiar};
+        idioma.botones(button);
     }
 }

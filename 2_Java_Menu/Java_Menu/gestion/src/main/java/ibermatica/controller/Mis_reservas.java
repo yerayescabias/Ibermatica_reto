@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.TimeZone;
 import ibermatica.App;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,13 +21,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
-
 public class Mis_reservas {
-    ArrayList<String> paborrar= new ArrayList<>();
-    final int tipo=1;
+    ArrayList<String> paborrar = new ArrayList<>();
+    final int tipo = 1;
     String id_inicio = sql.id_sesion;
+    Idioma idioma ;
     sql database = new sql();
     @FXML
     ScrollPane buttons;
@@ -34,15 +36,21 @@ public class Mis_reservas {
     TableView tabla_mis_reservas;
     @FXML
     Label fecha;
+    @FXML
+    Text mr_conosotros, mr_anos, mr_perfil, mr_reservas;
+    @FXML
+    Button mr_info, mr_mr, mr_cs, mr_atras;
+    
+    
 
     @FXML
-    public void initialize() throws SQLException{
-          Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Spain"));
+    public void initialize() throws SQLException {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Spain"));
         cal.setTime(database.buscar(id_inicio).getRegisterDate());
-        String años = String.valueOf((cal.get(Calendar.YEAR))-LocalDate.now().getYear());
+        String años = String.valueOf((cal.get(Calendar.YEAR)) - LocalDate.now().getYear());
         fecha.setText(años);
         buttonbar();
-        
+
         ResultSet rs = database.reservasdefault(tipo);
         tabla_mis_reservas.getColumns().clear();
         tabla_mis_reservas.getItems().clear();
@@ -57,19 +65,18 @@ public class Mis_reservas {
             ArrayList<String> reservasdatos = new ArrayList<>();
             for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                 reservasdatos.add(rs.getString(i));
-                
+
             }
             columnas.add(reservasdatos);
         }
         tabla_mis_reservas.getItems().addAll(columnas);
-        
-        
-
+        idioma(idioma.idioma_default());
     }
+
     @SuppressWarnings("unchecked")
     @FXML
     public void datos(ResultSet rs) throws SQLException {
-        
+
         tabla_mis_reservas.getColumns().clear();
         tabla_mis_reservas.getItems().clear();
         ArrayList<ArrayList<String>> columnas = new ArrayList<>();
@@ -90,12 +97,11 @@ public class Mis_reservas {
         tabladinamica();
     }
 
-    public void tabladinamica(){
+    public void tabladinamica() {
         TableColumn actionCol = new TableColumn("Action");
         actionCol.setCellValueFactory(new PropertyValueFactory<>(""));
 
-        Callback<TableColumn<ArrayList<String>, String>, TableCell <ArrayList<String>, String>> cellFactory =
-        new Callback<TableColumn<ArrayList<String>, String>,TableCell<ArrayList<String>, String>> () {
+        Callback<TableColumn<ArrayList<String>, String>, TableCell<ArrayList<String>, String>> cellFactory = new Callback<TableColumn<ArrayList<String>, String>, TableCell<ArrayList<String>, String>>() {
             @Override
             public TableCell call(final TableColumn<ArrayList<String>, String> param) {
                 final TableCell<ArrayList<String>, String> cell = new TableCell<ArrayList<String>, String>() {
@@ -110,18 +116,18 @@ public class Mis_reservas {
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                
-                                paborrar= getTableView().getItems().get(getIndex());
+
+                                paborrar = getTableView().getItems().get(getIndex());
                                 database.borrar_reserva(paborrar.get(0));
                                 tabla_mis_reservas.getItems().clear();
                                 try {
                                     datos(database.reservas(paborrar.get(2), tipo));
                                     buttonbar();
                                 } catch (SQLException e) {
-                                    
+
                                     e.printStackTrace();
                                 }
-                                
+
                             });
                             setGraphic(btn);
                             setText(null);
@@ -136,17 +142,17 @@ public class Mis_reservas {
 
     }
 
-    public void buttonbar(){
-        HBox kendrick= new HBox();
-        Iterator botones= database.maquinas_reservadas().iterator();
-        while(botones.hasNext()){
+    public void buttonbar() {
+        HBox kendrick = new HBox();
+        Iterator botones = database.maquinas_reservadas().iterator();
+        while (botones.hasNext()) {
             String nombre = (String) botones.next();
 
             Button info = new Button(nombre);
-            info.setOnMousePressed((MouseEvent) ->{
-                if(info.isPressed()){
+            info.setOnMousePressed((MouseEvent) -> {
+                if (info.isPressed()) {
                     try {
-                        ResultSet rs =database.reservas(info.getText(), tipo);
+                        ResultSet rs = database.reservas(info.getText(), tipo);
                         datos(rs);
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -157,20 +163,42 @@ public class Mis_reservas {
         }
         buttons.setContent(kendrick);
     }
+
     @FXML
-    public void atras()throws IOException{
+    public void atras() throws IOException {
         App.setRoot("mis_reservas");
     }
+
     @FXML
-    public void previous()throws IOException{
+    public void previous() throws IOException {
         App.setRoot("Reservas");
     }
+
     @FXML
-    public void cerrarsesion()throws IOException{
+    public void cerrarsesion() throws IOException {
         App.setRoot("Inicio");
     }
+
     @FXML
-    public void info()throws IOException{
+    public void info() throws IOException {
         App.setRoot("Usuario");
+    }
+
+    @FXML
+    public void Español() {
+        idioma("Español");
+    }
+
+    @FXML
+    public void Ingles() {
+        idioma("Ingles");
+    }
+
+    public void idioma(String lenguaje){
+        idioma = new Idioma(lenguaje);
+        Text[] texto={ mr_conosotros, mr_anos, mr_perfil, mr_reservas};
+        idioma.text(texto);
+        Button[] buttone={mr_info, mr_mr, mr_cs, mr_atras};
+        idioma.botones(buttone);
     }
 }

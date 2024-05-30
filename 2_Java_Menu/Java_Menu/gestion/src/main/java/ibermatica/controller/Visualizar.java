@@ -8,24 +8,29 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import ibermatica.App;
 import ibermatica.model.sql;
+import ibermatica.multidioma.Idioma;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 
 
 
 public class Visualizar {
     sql database= new sql();
 
-    
+    Idioma idioma =inicio.idioma;
     @FXML
     ComboBox visualizar_picker;
 
     @FXML
     TableView users_table;
+    
+    @FXML
+    Text vi_explain;
 
 
     @FXML
@@ -35,6 +40,7 @@ public class Visualizar {
             visualizar_picker.getItems().add(tablas_nombre.next());
         }
         visualizar_picker.getSelectionModel().select(1);
+        idioma(idioma.idioma_default());
 
     }
 
@@ -72,7 +78,19 @@ public class Visualizar {
        
     }
     
-    
+    @FXML
+    public void español(){
+        idioma("Español");
+    }
+    @FXML
+    public void ingles(){
+        idioma("Ingles");
+    }
+    public void idioma(String lenguaje){
+        idioma = new Idioma(lenguaje);
+        vi_explain.setText(idioma.getProperty("vi_explain"));
+        
+    }
      @FXML
     public void cerrar(){
         Platform.exit();

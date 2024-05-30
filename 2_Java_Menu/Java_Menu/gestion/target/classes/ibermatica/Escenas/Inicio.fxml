@@ -15,17 +15,17 @@
    <bottom>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" style="-fx-background-color: F6ECA9;" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField fx:id="password" layoutX="805.0" layoutY="347.0" onAction="#iniciar" prefHeight="40.0" prefWidth="280.0" />
-            <TextField fx:id="user" layoutX="805.0" layoutY="258.0" prefHeight="40.0" prefWidth="280.0" />
-            <Label layoutX="805.0" layoutY="233.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Usuario:">
+            <PasswordField fx:id="in_password" layoutX="805.0" layoutY="347.0" onAction="#iniciar" prefHeight="40.0" prefWidth="280.0" />
+            <TextField fx:id="in_user" layoutX="805.0" layoutY="258.0" prefHeight="40.0" prefWidth="280.0" />
+            <Label fx:id="in_usuario" layoutX="805.0" layoutY="233.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Usuario:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label layoutX="805.0" layoutY="320.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Contraseña:">
+            <Label fx:id="in_contra" layoutX="805.0" layoutY="320.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Contraseña:">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Button fx:id="btn" layoutX="805.0" layoutY="417.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="38.0" prefWidth="112.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Iniciar ">
+            <Button fx:id="in_btn" layoutX="805.0" layoutY="417.0" mnemonicParsing="false" onAction="#iniciar" prefHeight="38.0" prefWidth="112.0" styleClass="Label" stylesheets="@../Estilos/Inicio.css" text="Iniciar ">
                <font>
                   <Font size="18.0" />
                </font></Button>
@@ -41,6 +41,11 @@
                         <Image url="@../imagenes/logo.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="635.0" layoutY="14.0" onMouseClicked="#Español">
+                     <image>
+                        <Image url="@../imagenes/espanol.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="741.0" layoutY="339.0">
@@ -51,6 +56,11 @@
             <ImageView fitHeight="56.0" fitWidth="56.0" layoutX="741.0" layoutY="250.0">
                <image>
                   <Image url="@../imagenes/userS.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="702.0" layoutY="14.0" onMouseClicked="#Ingles">
+               <image>
+                  <Image url="@../imagenes/INGLES.png" />
                </image>
             </ImageView>
          </children>

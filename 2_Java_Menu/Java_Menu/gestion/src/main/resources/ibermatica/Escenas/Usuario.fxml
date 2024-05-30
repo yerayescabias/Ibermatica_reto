@@ -16,7 +16,7 @@
    <children>
       <Pane fx:id="info" layoutX="3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1344.0">
          <children>
-            <Pane layoutX="44.0" layoutY="31.0" prefHeight="676.0" prefWidth="345.0" stylesheets="@../Estilos/estilos.css">
+            <Pane layoutX="44.0" layoutY="31.0" prefHeight="676.0" prefWidth="375.0" stylesheets="@../Estilos/estilos.css">
                <children>
                   <ImageView fitHeight="156.0" fitWidth="152.0">
                      <image>
@@ -28,15 +28,10 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <Button layoutX="66.0" layoutY="333.0" mnemonicParsing="false" onAction="#cambio_contraseña" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: none; -fx-font-weight: bold;" text="Cambiar Contraseña">
+                  <Button fx:id="pe_cc" layoutX="66.0" layoutY="333.0" mnemonicParsing="false" onAction="#cambio_contraseña" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: none; -fx-font-weight: bold;" text="Cambiar Contraseña">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Label fx:id="fecha" alignment="CENTER_RIGHT" layoutX="179.0" layoutY="60.0" prefHeight="43.0" prefWidth="73.0" text="Fecha">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Label>
                   <Label fx:id="nombre" layoutX="12.0" layoutY="191.0" prefHeight="43.0" prefWidth="276.0" text="nombre">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
@@ -45,18 +40,18 @@
                         <Font name="System Bold" size="29.0" />
                      </font>
                   </Label>
-                  <Button layoutX="63.0" layoutY="462.0" mnemonicParsing="false" onAction="#atras" prefHeight="38.0" prefWidth="175.0" style="-fx-font-weight: bold; -fx-background-color: none;" text="Mis reservas">
+                  <Button fx:id="pe_mr" layoutX="63.0" layoutY="462.0" mnemonicParsing="false" onAction="#atras" prefHeight="38.0" prefWidth="175.0" style="-fx-font-weight: bold; -fx-background-color: none;" text="Mis reservas">
                      <font>
                         <Font size="13.0" />
                      </font></Button>
-                  <Button layoutX="203.0" layoutY="569.0" mnemonicParsing="false" onAction="#previous" prefHeight="38.0" prefWidth="98.0" text="Atras" />
-                  <Button layoutX="24.0" layoutY="569.0" mnemonicParsing="false" onAction="#cerrarsesion" prefHeight="38.0" prefWidth="133.0" text="Cerrar Sesion" />
-                  <Text layoutX="46.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfil">
+                  <Button fx:id="pe_atras" layoutX="203.0" layoutY="569.0" mnemonicParsing="false" onAction="#previous" prefHeight="38.0" prefWidth="98.0" text="Atras" />
+                  <Button fx:id="pe_cs" layoutX="24.0" layoutY="569.0" mnemonicParsing="false" onAction="#cerrarsesion" prefHeight="38.0" prefWidth="133.0" text="Cerrar Sesion" />
+                  <Text fx:id="pe_pe" layoutX="46.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfil">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Text layoutX="46.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas">
+                  <Text fx:id="pe_resevas" layoutX="46.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -66,17 +61,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="253.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="años">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="195.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Con nosotros">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-                  <Button layoutX="66.0" layoutY="373.0" mnemonicParsing="false" onAction="#info" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: none; -fx-font-weight: bold;" text="Informacion">
+                  <Button fx:id="pe_info" layoutX="66.0" layoutY="373.0" mnemonicParsing="false" onAction="#info" prefHeight="38.0" prefWidth="175.0" style="-fx-background-color: none; -fx-font-weight: bold;" text="Informacion">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -84,11 +69,36 @@
                   <Button layoutX="253.0" layoutY="340.0" mnemonicParsing="false" onAction="#cambio_contraseña" styleClass="Perfil" stylesheets="@../Estilos/estilos.css" text="&gt;" />
                   <Button layoutX="253.0" layoutY="380.0" mnemonicParsing="false" onAction="#info" styleClass="Perfil" stylesheets="@../Estilos/estilos.css" text="&gt;" />
                   <Button layoutX="253.0" layoutY="468.0" mnemonicParsing="false" onAction="#atras" styleClass="Perfil" stylesheets="@../Estilos/estilos.css" text="&gt;" />
+                  <Label fx:id="fecha" alignment="CENTER_RIGHT" layoutX="158.0" layoutY="103.0" prefHeight="43.0" prefWidth="73.0" text="Fecha">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="pe_anos" layoutX="238.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="años">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pe_conosotros" layoutX="180.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Con nosotros">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="298.0" layoutY="17.0" onMouseClicked="#Ingles">
+                     <image>
+                        <Image url="@../imagenes/INGLES.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="333.0" layoutY="16.0" onMouseClicked="#Español">
+                     <image>
+                        <Image url="@../imagenes/espanol.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
             <Pane layoutX="457.0" layoutY="45.0" prefHeight="362.0" prefWidth="850.0">
                <children>
-                  <Text layoutX="126.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupacion" wrappingWidth="98.0">
+                  <Text fx:id="pe_ocupacion" layoutX="126.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupacion" wrappingWidth="98.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -118,7 +128,7 @@
                         <Image url="@../imagenes/occupation.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="464.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" wrappingWidth="98.0">
+                  <Text fx:id="pe_telefono" layoutX="464.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" wrappingWidth="98.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -128,7 +138,7 @@
                         <Image url="@../imagenes/telephone.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="126.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dni" wrappingWidth="98.0">
+                  <Text fx:id="pe_dni" layoutX="126.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dni" wrappingWidth="98.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -138,7 +148,7 @@
                         <Image url="@../imagenes/id.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="464.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="98.0">
+                  <Text fx:id="pe_email" layoutX="464.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="98.0">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -157,13 +167,13 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <Text layoutX="85.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
+                  <Text fx:id="pe_usuario" layoutX="85.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
                   <PasswordField fx:id="contraseña" alignment="CENTER" disable="true" layoutX="306.0" layoutY="81.0" prefHeight="38.0" prefWidth="260.0" style="-fx-background-color: none; -fx-text-aligment: center;" />
-                  <Text disable="true" layoutX="315.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+                  <Text fx:id="pe_contra" disable="true" layoutX="315.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -190,22 +200,22 @@
       </Pane>
       <Pane fx:id="cambiar" layoutX="-3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1350.0" visible="false">
          <children>
-            <Text layoutX="553.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña Antigua">
+            <Text fx:id="cc_ca" layoutX="553.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña Antigua">
                <font>
                   <Font size="18.0" />
                </font></Text>
             <TextField fx:id="contraseña_antigua" layoutX="555.0" layoutY="287.0" prefHeight="40.0" prefWidth="333.0" />
-            <Text layoutX="553.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña Nueva">
+            <Text fx:id="cc_cn" layoutX="553.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña Nueva">
                <font>
                   <Font size="18.0" />
                </font></Text>
             <TextField fx:id="contraseña_nueva" layoutX="555.0" layoutY="362.0" prefHeight="40.0" prefWidth="333.0" />
-            <Text layoutX="553.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion de Contraseña">
+            <Text fx:id="cc_cdc" layoutX="553.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmacion de Contraseña">
                <font>
                   <Font size="18.0" />
                </font></Text>
             <TextField fx:id="contraseña_confir" layoutX="555.0" layoutY="442.0" prefHeight="40.0" prefWidth="333.0" />
-            <Button fx:id="contra" layoutX="553.0" layoutY="516.0" mnemonicParsing="false" onAction="#contra" prefHeight="36.0" prefWidth="109.0" text="Cambiar">
+            <Button fx:id="cc_cambiar" layoutX="553.0" layoutY="516.0" mnemonicParsing="false" onAction="#contra" prefHeight="36.0" prefWidth="109.0" text="Cambiar">
                <font>
                   <Font size="17.0" />
                </font></Button>
@@ -214,7 +224,7 @@
                   <Image url="@../imagenes/user.png" />
                </image>
             </ImageView>
-            <Button layoutX="699.0" layoutY="516.0" mnemonicParsing="false" onAction="#cambio" prefHeight="38.0" prefWidth="108.0" text="Atras">
+            <Button fx:id="cc_atras" layoutX="699.0" layoutY="516.0" mnemonicParsing="false" onAction="#cambio" prefHeight="38.0" prefWidth="108.0" text="Atras">
                <font>
                   <Font size="17.0" />
                </font>
