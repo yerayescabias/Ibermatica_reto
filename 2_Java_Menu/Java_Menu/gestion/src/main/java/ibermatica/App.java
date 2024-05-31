@@ -17,6 +17,7 @@ public class App extends Application {
 
     private static Scene scene;
 
+    @SuppressWarnings("exports")
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Inicio"),  1350, 750);

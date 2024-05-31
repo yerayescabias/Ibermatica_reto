@@ -1,0 +1,13 @@
+.Perfil{
+    -fx-border-color: black;
+    -fx-background-radius:5em;
+    -fx-border-widht:2px;
+    -fx-background-color:aqua;
+    -fx-border-radius: 50%; /* Radio del borde, 50% hace que sea un círculo */
+    
+    
+}
+Pane{
+    -fx-border-color: black;
+    -fx-border-widht:2px;
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#tabladereserva" prefHeight="750.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.Reservas">
+   <children>
+      <ImageView fitHeight="508.0" fitWidth="971.0" layoutX="18.0" layoutY="205.0">
+         <image>
+            <Image url="@../imagenes/Fabrica_mapa.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="re_reservas" layoutX="399.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservas" textAlignment="CENTER" wrappingWidth="298.9596252441406">
+         <font>
+            <Font size="49.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="85.0" fitWidth="85.0" layoutX="1106.0" layoutY="24.0">
+         <image>
+            <Image url="@../imagenes/ayesa.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="user" fitHeight="60.0" fitWidth="60.0" layoutX="1224.0" layoutY="31.0" onMouseClicked="#info">
+         <image>
+            <Image url="@../imagenes/user.png" />
+         </image>
+      </ImageView>
+      <Line endX="808.3333129882812" layoutX="149.0" layoutY="120.0" startX="-100.0" />
+      <TableView fx:id="reservas_maquina" layoutX="974.0" layoutY="114.0" prefHeight="593.0" prefWidth="369.0" />
+      <Text fx:id="re_iniciodia" layoutX="129.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
+         <font>
+            <Font size="16.0" />
+         </font></Text>
+      <DatePicker fx:id="re_inicio_dia" layoutX="129.0" layoutY="199.0" prefHeight="40.0" prefWidth="315.0" />
+      <Button fx:id="re_embalaje" layoutX="191.0" layoutY="378.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="64.0" prefWidth="210.0" style="-fx-background-color: none;" text="Embalaje">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_procesados" layoutX="174.0" layoutY="469.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="85.0" prefWidth="235.0" style="-fx-background-color: none;" text="Procesados">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_tornos" layoutX="188.0" layoutY="589.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="91.0" prefWidth="217.0" style="-fx-background-color: none;" text="Tornos">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_freasoras" layoutX="392.0" layoutY="354.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="64.0" prefWidth="288.0" style="-fx-background-color: none;" text="Fresadoras">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_lijadoras" layoutX="704.0" layoutY="580.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="91.0" prefWidth="167.0" style="-fx-background-color: none;" text="Lijadoras">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_selladora" alignment="BOTTOM_LEFT" layoutX="4.0" layoutY="480.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="75.0" prefWidth="215.0" rotate="270.0" style="-fx-background-color: none;" text="Selladora" textAlignment="JUSTIFY">
+         <font>
+            <Font size="34.0" />
+         </font></Button>
+      <Button fx:id="re_soldadura" layoutX="697.0" layoutY="434.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="56.0" prefWidth="168.0" style="-fx-background-color: none;" text="Soldadura">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Button fx:id="re_hornos" layoutX="183.0" layoutY="296.0" mnemonicParsing="false" onMousePressed="#buttonpressed" prefHeight="48.0" prefWidth="191.0" style="-fx-background-color: none;" text="Hornos">
+         <font>
+            <Font size="28.0" />
+         </font></Button>
+      <Text fx:id="re_findia" layoutX="598.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="re_fin_dia" layoutX="598.0" layoutY="199.0" prefHeight="40.0" prefWidth="315.0" />
+      <Line endX="352.0" endY="-7.0" layoutX="159.0" layoutY="146.0" startX="352.0" startY="103.0" />
+      <Text fx:id="re_iniciore" layoutX="185.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INICIO DE RESERVA" wrappingWidth="300.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="re_finre" layoutX="682.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FIN DE RESERVA" wrappingWidth="300.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <MenuButton contentDisplay="BOTTOM" layoutX="1228.0" layoutY="32.0" mnemonicParsing="false" opacity="0.0" prefHeight="58.0" prefWidth="50.0" textFill="WHITE">
+        <items>
+         <MenuItem fx:id="re_mis_reservas" mnemonicParsing="false" onAction="#mis_reservas" text="Mis reservas" />
+          <MenuItem fx:id="re_perfil" mnemonicParsing="false" onAction="#info" text="Perfil" />
+            <MenuItem fx:id="re_cerrar_sesion" mnemonicParsing="false" onAction="#atras" text="Cerrar sesion" />
+        </items>
+      </MenuButton>
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="29.0" layoutY="16.0" onMouseClicked="#Ingles">
+         <image>
+            <Image url="@../imagenes/INGLES.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="45.0" fitWidth="45.0" layoutX="91.0" layoutY="16.0" onMouseClicked="#Español">
+         <image>
+            <Image url="@../imagenes/espanol.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
