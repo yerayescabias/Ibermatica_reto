@@ -56,8 +56,8 @@ CREATE TABLE IF NOT EXISTS reservation_machines (
     end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     reservation_id INT AUTO_INCREMENT NOT NULL,
     PRIMARY KEY(reservation_id),
-    FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY(serial_num) REFERENCES machines(serial_num) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY(user_id) REFERENCES users(user_id) ,
+    FOREIGN KEY(serial_num) REFERENCES machines(serial_num) 
 );
 
 INSERT INTO reservation_machines (user_id, serial_num, end_date)
