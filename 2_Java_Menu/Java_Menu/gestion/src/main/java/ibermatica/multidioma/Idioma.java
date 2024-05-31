@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 public class Idioma extends Properties {
-    public boolean lan;
+    public static boolean lan= true;
     public Idioma(String idioma){
 
         switch(idioma){
@@ -76,7 +76,7 @@ public class Idioma extends Properties {
         }
     }
     
-    public String idioma_default(){
+    public static String idioma_default(){
         if(lan==true){
         return("Español");
         }else if(lan==false){

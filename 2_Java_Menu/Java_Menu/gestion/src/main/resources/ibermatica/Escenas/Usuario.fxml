@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" stylesheets="@../Estilos/estilos.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.trabajadores_info">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica.controller.trabajadores_info">
    <children>
-      <Pane fx:id="info" layoutX="3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1344.0">
+      <Pane fx:id="info" layoutX="3.0" layoutY="2.0" prefHeight="750.0" prefWidth="1344.0" stylesheets="@../Estilos/Admin.css">
          <children>
             <Pane layoutX="44.0" layoutY="31.0" prefHeight="676.0" prefWidth="375.0" stylesheets="@../Estilos/estilos.css">
                <children>
@@ -96,7 +96,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="457.0" layoutY="45.0" prefHeight="362.0" prefWidth="850.0">
+            <Pane layoutX="457.0" layoutY="45.0" prefHeight="362.0" prefWidth="850.0" styleClass="Label" stylesheets="@../Estilos/estilos.css">
                <children>
                   <Text fx:id="pe_ocupacion" layoutX="126.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupacion" wrappingWidth="98.0">
                      <font>
@@ -160,7 +160,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutX="499.0" layoutY="438.0" prefHeight="200.0" prefWidth="629.0">
+            <Pane layoutX="499.0" layoutY="438.0" prefHeight="200.0" prefWidth="629.0" stylesheets="@../Estilos/estilos.css">
                <children>
                   <Label fx:id="usuario" layoutX="81.0" layoutY="79.0" prefHeight="43.0" prefWidth="152.0" text="Usuario">
                      <font>
@@ -172,13 +172,13 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <PasswordField fx:id="contraseña" alignment="CENTER" disable="true" layoutX="306.0" layoutY="81.0" prefHeight="38.0" prefWidth="260.0" style="-fx-background-color: none; -fx-text-aligment: center;" />
+                  <PasswordField fx:id="contraseña" alignment="CENTER" disable="true" layoutX="328.0" layoutY="80.0" prefHeight="38.0" prefWidth="260.0" style="-fx-background-color: none; -fx-text-aligment: center;" stylesheets="@../Estilos/estilos.css" />
                   <Text fx:id="pe_contra" disable="true" layoutX="315.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Label fx:id="contra_libre" alignment="CENTER" layoutX="306.0" layoutY="81.0" prefHeight="38.0" prefWidth="260.0" style="-fx-text-alignment: center;" textAlignment="CENTER" visible="false" />
+                  <Label fx:id="contra_libre" alignment="CENTER" layoutX="306.0" layoutY="81.0" prefHeight="38.0" prefWidth="260.0" style="-fx-text-alignment: center;" styleClass="Passwordfield" stylesheets="@../Estilos/estilos.css" textAlignment="CENTER" visible="false" />
                   <ImageView fitHeight="65.0" fitWidth="63.0" layoutX="5.0" layoutY="61.0">
                      <image>
                         <Image url="@../imagenes/user1.png" />
@@ -189,7 +189,7 @@
                         <Image url="@../imagenes/password.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="578.0" layoutY="87.0" onMouseClicked="#ojo">
+                  <ImageView fitHeight="24.0" fitWidth="25.0" layoutX="586.0" layoutY="87.0" onMouseClicked="#ojo">
                      <image>
                         <Image url="@../imagenes/eye.png" />
                      </image>

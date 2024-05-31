@@ -14,23 +14,22 @@ public class Menu_admin {
     Button am_visualizar,am_gestion,am_estado;
     @FXML
     Text am_adminmenu; 
-    Idioma idioma ;
-
 
 
     public void initialize(){
-        
+        idioma(Idioma.idioma_default());
     }
     @FXML
     public void Español(){
         idioma("Español");
+        
     }
     @FXML
     public void Ingles(){
         idioma("Ingles");
     }
     public void idioma(String lenguaje){
-        idioma = new Idioma(lenguaje);
+        Idioma idioma = new Idioma(lenguaje);
         am_estado.setText(idioma.getProperty("am_estado"));
         am_gestion.setText(idioma.getProperty("am_gestion"));
         am_visualizar.setText(idioma.getProperty("am_visualizar"));

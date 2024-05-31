@@ -35,7 +35,7 @@ public class Mis_reservas {
     @FXML
     TableView tabla_mis_reservas;
     @FXML
-    Label fecha;
+    Label fecha,nombre,apellido;
     @FXML
     Text mr_conosotros, mr_anos, mr_perfil, mr_reservas;
     @FXML
@@ -49,6 +49,8 @@ public class Mis_reservas {
         cal.setTime(database.buscar(id_inicio).getRegisterDate());
         String años = String.valueOf((cal.get(Calendar.YEAR)) - LocalDate.now().getYear());
         fecha.setText(años);
+        nombre.setText(database.buscar(id_inicio).getName());
+        apellido.setText(database.buscar(id_inicio).getSurname());
         buttonbar();
 
         ResultSet rs = database.reservasdefault(tipo);

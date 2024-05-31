@@ -40,12 +40,10 @@ public class inicio{
     @FXML
     public void Español(){
         idioma("Español");
-        idioma.setLan(true);
     }
     @FXML
     public void Ingles(){
         idioma("Ingles");
-        idioma.setLan(false);
     }
     public void idioma(String lenguaje){
         idioma = new Idioma(lenguaje);
